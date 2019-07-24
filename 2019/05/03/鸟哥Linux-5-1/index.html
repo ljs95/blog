@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang>
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="鸟哥的Linux私房菜,">
 
 
 
@@ -80,13 +80,14 @@
 
 
 <meta name="description" content="1. 使用者与群组Linux系统分使用者、群组、其他人的三种身份，权限就是根据这三种身份进行分配的。 2. 文件权限概念2.1 Linux文件属性使用 ls -al 或 ll 命令查看当前目录的文件属性 123$ ls -al...-rwxrw-r--. 1 john man  334 May  2 04:02 file  上面分为7部分，分别为 -rwxrw-r– 、 1 、john 、man">
+<meta name="keywords" content="鸟哥的Linux私房菜">
 <meta property="og:type" content="article">
 <meta property="og:title" content="鸟哥的Linux私房菜笔记第五章-文件权限与目录配置（一）">
 <meta property="og:url" content="http://yoursite.com/2019/05/03/鸟哥Linux-5-1/index.html">
 <meta property="og:site_name" content="Johnson">
 <meta property="og:description" content="1. 使用者与群组Linux系统分使用者、群组、其他人的三种身份，权限就是根据这三种身份进行分配的。 2. 文件权限概念2.1 Linux文件属性使用 ls -al 或 ll 命令查看当前目录的文件属性 123$ ls -al...-rwxrw-r--. 1 john man  334 May  2 04:02 file  上面分为7部分，分别为 -rwxrw-r– 、 1 、john 、man">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-24T13:49:27.827Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-24T14:16:47.171Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="鸟哥的Linux私房菜笔记第五章-文件权限与目录配置（一）">
 <meta name="twitter:description" content="1. 使用者与群组Linux系统分使用者、群组、其他人的三种身份，权限就是根据这三种身份进行分配的。 2. 文件权限概念2.1 Linux文件属性使用 ls -al 或 ll 命令查看当前目录的文件属性 123$ ls -al...-rwxrw-r--. 1 john man  334 May  2 04:02 file  上面分为7部分，分别为 -rwxrw-r– 、 1 、john 、man">
@@ -105,7 +106,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -137,7 +138,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -185,7 +186,27 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Startseite
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
           </a>
         </li>
       
@@ -195,7 +216,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            Archiv
+            归档
           </a>
         </li>
       
@@ -237,7 +258,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Johnson">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="image" content="/blog/images/zerro.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -259,9 +280,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-03T10:51:11+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-03T10:51:11+08:00">
                 2019-05-03
               </time>
             
@@ -271,6 +292,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -390,6 +433,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/blog/tags/鸟哥的Linux私房菜/" rel="tag"># 鸟哥的Linux私房菜</a>
+          
+        </div>
+      
 
       
       
@@ -465,10 +514,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            站点概览
           </li>
         </ul>
       
@@ -476,6 +525,8 @@
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/blog/images/zerro.jpg" alt="Johnson">
             
               <p class="site-author-name" itemprop="name">Johnson</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -489,21 +540,30 @@
                 <a href="/blog/archives/">
               
                   <span class="site-state-item-count">5</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
             
 
             
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/blog/tags/index.html">
                   <span class="site-state-item-count">1</span>
-                  <span class="site-state-item-name">Tags</span>
-                
+                  <span class="site-state-item-name">标签</span>
+                </a>
               </div>
             
 
@@ -564,7 +624,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -572,7 +632,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
 
 
 
