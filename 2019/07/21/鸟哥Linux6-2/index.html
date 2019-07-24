@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="文件内容查询直接查询文件内容查阅一个文件的内容可以使用指令cat/tac/nl。 1# [cat|tac|nl] 文件  区别：1.cat是直接把文件内容输出到屏幕上，并且从第一行开始输出到末行2.tal和cat相同，只不过tal是从末行反过来开始输出到第一行3.nl则是可以添加行号打印，第一行可以显示1/01/001… 可翻页查询more  空格键 ：翻下一页enter : 翻下一行/字符串 ：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鸟哥的Linux私房菜笔记第六章-文件与目录管理（二）">
+<meta property="og:url" content="http://yoursite.com/2019/07/21/鸟哥Linux6-2/index.html">
+<meta property="og:site_name" content="Johnson">
+<meta property="og:description" content="文件内容查询直接查询文件内容查阅一个文件的内容可以使用指令cat/tac/nl。 1# [cat|tac|nl] 文件  区别：1.cat是直接把文件内容输出到屏幕上，并且从第一行开始输出到末行2.tal和cat相同，只不过tal是从末行反过来开始输出到第一行3.nl则是可以添加行号打印，第一行可以显示1/01/001… 可翻页查询more  空格键 ：翻下一页enter : 翻下一行/字符串 ：">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-24T13:46:40.747Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="鸟哥的Linux私房菜笔记第六章-文件与目录管理（二）">
+<meta name="twitter:description" content="文件内容查询直接查询文件内容查阅一个文件的内容可以使用指令cat/tac/nl。 1# [cat|tac|nl] 文件  区别：1.cat是直接把文件内容输出到屏幕上，并且从第一行开始输出到末行2.tal和cat相同，只不过tal是从末行反过来开始输出到第一行3.nl则是可以添加行号打印，第一行可以显示1/01/001… 可翻页查询more  空格键 ：翻下一页enter : 翻下一行/字符串 ：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Penulis'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/21/鸟哥Linux6-2/">
+
+
+
+
+
+  <title>鸟哥的Linux私房菜笔记第六章-文件与目录管理（二） | Johnson</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Johnson</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一条小木木的个人网站</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Beranda
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Arsip
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/2019/07/21/鸟哥Linux6-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Johnson">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Johnson">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">鸟哥的Linux私房菜笔记第六章-文件与目录管理（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Diposting di</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-21T20:51:11+08:00">
+                2019-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="文件内容查询"><a href="#文件内容查询" class="headerlink" title="文件内容查询"></a>文件内容查询</h1><h2 id="直接查询文件内容"><a href="#直接查询文件内容" class="headerlink" title="直接查询文件内容"></a>直接查询文件内容</h2><p>查阅一个文件的内容可以使用指令cat/tac/nl。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># [cat|tac|nl] 文件</span><br></pre></td></tr></table></figure>
+
+<p>区别：<br>1.cat是直接把文件内容输出到屏幕上，并且从第一行开始输出到末行<br>2.tal和cat相同，只不过tal是从末行反过来开始输出到第一行<br>3.nl则是可以添加行号打印，第一行可以显示1/01/001…<br><br></p>
+<h2 id="可翻页查询"><a href="#可翻页查询" class="headerlink" title="可翻页查询"></a>可翻页查询</h2><p><strong>more</strong></p>
+<blockquote>
+<p>空格键 ：翻下一页<br>enter : 翻下一行<br>/字符串 ：向下查找该字符串<br>:f ：显示出文件名和目前显示行数<br>q ：离开<br>b ： 往回翻页</p>
+</blockquote>
+<p><strong>less</strong></p>
+<blockquote>
+<p>空格键|[pagedown] ：翻下一页<br>[pageup]: 翻上一页<br>/字符串 ：向下查找该字符串<br>?字符串 ：向上查找该字符串<br>q ：离开<br>g : 跳转到第一行<br>G : 跳转到末行</p>
+</blockquote>
+<br>
+
+<h2 id="文件截取"><a href="#文件截取" class="headerlink" title="文件截取"></a>文件截取</h2><p>当文件过大，内容过多时，我们可以抽取其中某几行来查看。<br><strong>head(取出前面几行)</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># head [-n number] 文件</span><br></pre></td></tr></table></figure>
+
+<p>-n : 代表的从头开始显示几行。所以number我们写的是数字，如果要显示前面5行，那么就是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head -n 5 file</span><br></pre></td></tr></table></figure>
+
+<p><strong>tail(取出后面几行)</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail [-n number] 文件</span><br></pre></td></tr></table></figure>
+
+<p>number和上述一样。<br>但是如果只查看第11-20行呢？我们就可以先取前20行，然后再取后面十行。那么就要用到管道啦。复习一下，管道的线是这个符号 “ | “，简称管线。（瞎扯╭(╯^╰)╮）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head -n 20 文件 | tail -n 20</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="非纯文本档-od"><a href="#非纯文本档-od" class="headerlink" title="非纯文本档 od"></a>非纯文本档 od</h2><p>如果我们需要查看非文本的文件，例如如何查看/usr/bin/passwd这个执行文件内容时。由于执行文件通常是binary file（二进制文件），如果我们使用上面的那些命令查看，就会出现乱码的情况。而查看这些文件我们可以使用od这个指令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">od [-t TYPE] 文件</span><br><span class="line">TYPE: </span><br><span class="line">   a：使用默认的字符来输出</span><br><span class="line">   c：使用ASCII字符来输出</span><br><span class="line">   d[size]: (decimal)使用十进制来输出，每个整数占用 size bytes;</span><br><span class="line">   f[size]: (floating)使用浮点数来输出，每个整数占用 size bytes;</span><br><span class="line">   o[size]: (octal)使用八进制来输出，每个整数占用 size bytes;</span><br><span class="line">   x[size]: (hexadecimal)使用十六进制来输出，每个整数占用 size bytes;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="文件默认权限和隐藏权限"><a href="#文件默认权限和隐藏权限" class="headerlink" title="文件默认权限和隐藏权限"></a>文件默认权限和隐藏权限</h1><h2 id="文件预设权限-umask"><a href="#文件预设权限-umask" class="headerlink" title="文件预设权限: umask"></a>文件预设权限: umask</h2><p>当我们建立文件或者目录时，那么他的权限是多少呢？这个就要使用umask这个指令了，使用方式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#umask //查看当前默认的权限值</span><br><span class="line">0002</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="文件隐藏属性"><a href="#文件隐藏属性" class="headerlink" title="文件隐藏属性"></a>文件隐藏属性</h2><p><strong>chattr（配置文件隐藏属性）</strong><br>除了rwx的那9个权限外，还有隐藏属性（真是难受）,该指令只在Ext2/Ext3/Ext4 的Linux文件系统生效，其他的文件系统可能无法完全支持该指令（现在都9102年了，不知道完全支持不呢…）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># chattr [+-=] [options] 文件或目录</span><br><span class="line">选项：</span><br><span class="line">+ : 增加某一个参数</span><br><span class="line">- : 移除某一个参数</span><br><span class="line">= : 重新设置参数。  </span><br><span class="line">  </span><br><span class="line">参数(options)</span><br><span class="line">a : 该文件只能增加数据，不能删除数据，也不能修改数据，只有root用户能设定该参数。</span><br><span class="line">i : 该文件不能删除、改名、设定连结，还无法写入或新增数据！只有root用户能设定该参数。</span><br><span class="line">... </span><br><span class="line">eg: </span><br><span class="line"># sudo chattr +a file1 //把file1文件设置隐藏属性i</span><br><span class="line"># rm -f test</span><br><span class="line">rm: cannot remove &apos;test&apos;: Operation not permitted //提示不能执行该操作哦，因为设置了隐藏属性i，是不能删除该文件的。</span><br></pre></td></tr></table></figure>
+
+<br>
+**lsattr（显示文件隐藏属性）**
+使用chattr设置了隐藏属性后，就可以使用lsattr查看啦
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># lsattr [-adR] 文件或目录</span><br><span class="line"> a : 查看隐藏文件属性</span><br><span class="line"> d : 如果是目录，仅列出目录本身的属性、而非目录内的文件属性</span><br><span class="line"> R : 连同子目录也一并列出</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="文件特殊权限-SUID，SGID，SBIT"><a href="#文件特殊权限-SUID，SGID，SBIT" class="headerlink" title="文件特殊权限: SUID，SGID，SBIT"></a>文件特殊权限: SUID，SGID，SBIT</h2><p>其实除了rwx的文件权限外，还有特殊权限s和t，s和t的作用分别放到第十三章和第十六章说明（按照我这个写博客的进度不知道要等到猴年马月，有想了解的童靴就去搜搜）。<br><br></p>
+<h3 id="Set-UID"><a href="#Set-UID" class="headerlink" title="Set UID"></a>Set UID</h3><p>当s这个标志出现在文件拥有者的x权限上时，例如 [-rwsr-xr-x]，此时就被称为Set UID，简称SUID特殊权限，SUID的特殊功能如下：</p>
+<blockquote>
+<p>SUID权限仅对二进制程序有效<br>执行者对改程序需要具有x的执行权限<br>本权限仅在执行该程序的过程中有效<br>执行者将具有该程序拥有者的权限</p>
+</blockquote>
+<h3 id="Set-GID"><a href="#Set-GID" class="headerlink" title="Set GID"></a>Set GID</h3><p>当s标志在所属组的x标志上，例如 [-rwx–s–x]，此时成为Set GID，简称SGID。对于文件有以下功能：</p>
+<blockquote>
+<p>SGID对二进制程序有用<br>执行者需要具备相应的x权限<br>执行该程序的用户则会获得该程序群组的支持</p>
+</blockquote>
+<p>对于目录有以下功能</p>
+<blockquote>
+<p>用户若对目录有r和x权限，则能进入该目录<br>用户在此目录下的有效群组将会变成该目录的群组（有效群组是用户创建文件的时候，文件默认所属的群组）<br>用途：若用户具有w权限，则用户所建立的新文件的群组则与该目录的群组相同。</p>
+</blockquote>
+<h3 id="Sticky-Bit"><a href="#Sticky-Bit" class="headerlink" title="Sticky Bit"></a>Sticky Bit</h3><p>简称SBIT，只对目录有效：</p>
+<blockquote>
+<p>用户对于此目录具有w,x权限<br>用户在此目录下建立文件，只有自己和root用户有权限删除文件。</p>
+</blockquote>
+<p>SUID/SGID/SBIT 权限设定</p>
+<blockquote>
+<p>4 为 SUID<br>2 为 SGID<br>1 为 SBIT</p>
+</blockquote>
+<p>第五章讲过了修改权限的命令，至于添加特殊权限则如下操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 4755 filename //这里的4为SUID的特殊权限 后面的755就和以前的一样</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="观察文件类型：file"><a href="#观察文件类型：file" class="headerlink" title="观察文件类型：file"></a>观察文件类型：file</h3><p>如果需要知道某个文件是属于什么类型，例如是属于ASCII、binary还是其它的文件。就是用这个类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ file test_file </span><br><span class="line">test_file: ASCII text //返回ASCII 的纯文本文件</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="指令与文件的搜索"><a href="#指令与文件的搜索" class="headerlink" title="指令与文件的搜索"></a>指令与文件的搜索</h1><h2 id="指令查询-which"><a href="#指令查询-which" class="headerlink" title="指令查询 which"></a>指令查询 which</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ which [-a] command</span><br><span class="line">-a : 将所有PATH目录中可以知道的指令列出</span><br><span class="line"></span><br><span class="line">例如：</span><br><span class="line">$ which service</span><br><span class="line">/usr/sbin/service</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="文件名查询-find"><a href="#文件名查询-find" class="headerlink" title="文件名查询 find"></a>文件名查询 find</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">格式： find [PATH] [option]</span><br><span class="line">$ find /home mtime 0 //查看home目录下24小时之内被修改的文件</span><br><span class="line">$ find /home -user vagrant //查询home目录下用户为vagrant的目录或文件</span><br><span class="line">/home/vagrant</span><br><span class="line">/home/vagrant/.cache</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">$ find /home -name test_file //查询home目录下名为test_file的文件</span><br><span class="line">/home/vagrant/test_file</span><br></pre></td></tr></table></figure>
+
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><blockquote>
+<p>看了鸟哥的Linux的第六章后，我差不多把文章讲到的命令有写上了，不过比较详细的东西可能并没有在文章这里写到，而且我个人觉得写这篇文章消耗我比较长的时间，<br>最大的原因是不管什么命令都写上去，反正书里说到的就写。后面越写我就越发现，文章不能照搬书里的内容，应该把比较常用的内容写到上面才比较合适。<br>不然的话还不如看我文章的小伙伴看书去比较好，所以我往后的文章可能会尽可能的写现实当中比较常用的东西（我自己觉得常用的东西，可能不是真的常用）。<br>好了，文章毕竟写得多才会有积累，写得会更快，但是更快的情况下我会尽可能的保证内容的正确性。<br>文章若有不足之处，请在评论区留言指出或邮件发送到<a href="mailto:15915126689@163.com" target="_blank" rel="noopener">15915126689@163.com</a>，谢谢大家。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2019/06/01/鸟哥Linux6-1/" rel="next" title="鸟哥的Linux私房菜笔记第六章-文件与目录管理（一）">
+                <i class="fa fa-chevron-left"></i> 鸟哥的Linux私房菜笔记第六章-文件与目录管理（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Daftar Isi
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Ikhtisar
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Johnson</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">posting</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件内容查询"><span class="nav-number">1.</span> <span class="nav-text">文件内容查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#直接查询文件内容"><span class="nav-number">1.1.</span> <span class="nav-text">直接查询文件内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可翻页查询"><span class="nav-number">1.2.</span> <span class="nav-text">可翻页查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件截取"><span class="nav-number">1.3.</span> <span class="nav-text">文件截取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非纯文本档-od"><span class="nav-number">1.4.</span> <span class="nav-text">非纯文本档 od</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件默认权限和隐藏权限"><span class="nav-number">2.</span> <span class="nav-text">文件默认权限和隐藏权限</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件预设权限-umask"><span class="nav-number">2.1.</span> <span class="nav-text">文件预设权限: umask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件隐藏属性"><span class="nav-number">2.2.</span> <span class="nav-text">文件隐藏属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件特殊权限-SUID，SGID，SBIT"><span class="nav-number">2.3.</span> <span class="nav-text">文件特殊权限: SUID，SGID，SBIT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-UID"><span class="nav-number">2.3.1.</span> <span class="nav-text">Set UID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-GID"><span class="nav-number">2.3.2.</span> <span class="nav-text">Set GID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sticky-Bit"><span class="nav-number">2.3.3.</span> <span class="nav-text">Sticky Bit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观察文件类型：file"><span class="nav-number">2.3.4.</span> <span class="nav-text">观察文件类型：file</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指令与文件的搜索"><span class="nav-number">3.</span> <span class="nav-text">指令与文件的搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#指令查询-which"><span class="nav-number">3.1.</span> <span class="nav-text">指令查询 which</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件名查询-find"><span class="nav-number">3.2.</span> <span class="nav-text">文件名查询 find</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Johnson</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Tema &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="目录与路径相对路径与绝对路径上一章简单的提到绝对路径和相对路径  绝对路径：路径的写法一定是由根目录（/）写起的，例如：/home/user 这个目录相对路径：路径的写法不是由根目录（/）写起，例如：我当前所在目录 /home/user，我要切换到/home/user2 目录下。那么写法就是 cd ../user2，其实相对路径指的意思是：相对于当前目录的路径。    目录的相关操作特殊的目录：1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鸟哥的Linux私房菜笔记第六章-文件与目录管理（一）">
+<meta property="og:url" content="http://yoursite.com/2019/06/01/鸟哥Linux6-1/index.html">
+<meta property="og:site_name" content="Johnson">
+<meta property="og:description" content="目录与路径相对路径与绝对路径上一章简单的提到绝对路径和相对路径  绝对路径：路径的写法一定是由根目录（/）写起的，例如：/home/user 这个目录相对路径：路径的写法不是由根目录（/）写起，例如：我当前所在目录 /home/user，我要切换到/home/user2 目录下。那么写法就是 cd ../user2，其实相对路径指的意思是：相对于当前目录的路径。    目录的相关操作特殊的目录：1">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-24T13:48:04.709Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="鸟哥的Linux私房菜笔记第六章-文件与目录管理（一）">
+<meta name="twitter:description" content="目录与路径相对路径与绝对路径上一章简单的提到绝对路径和相对路径  绝对路径：路径的写法一定是由根目录（/）写起的，例如：/home/user 这个目录相对路径：路径的写法不是由根目录（/）写起，例如：我当前所在目录 /home/user，我要切换到/home/user2 目录下。那么写法就是 cd ../user2，其实相对路径指的意思是：相对于当前目录的路径。    目录的相关操作特殊的目录：1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Penulis'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/01/鸟哥Linux6-1/">
+
+
+
+
+
+  <title>鸟哥的Linux私房菜笔记第六章-文件与目录管理（一） | Johnson</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Johnson</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一条小木木的个人网站</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Beranda
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Arsip
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/2019/06/01/鸟哥Linux6-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Johnson">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Johnson">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">鸟哥的Linux私房菜笔记第六章-文件与目录管理（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Diposting di</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-01T01:04:42+08:00">
+                2019-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="目录与路径"><a href="#目录与路径" class="headerlink" title="目录与路径"></a>目录与路径</h1><h2 id="相对路径与绝对路径"><a href="#相对路径与绝对路径" class="headerlink" title="相对路径与绝对路径"></a>相对路径与绝对路径</h2><p>上一章简单的提到绝对路径和相对路径</p>
+<blockquote>
+<p>绝对路径：路径的写法一定是由根目录（/）写起的，例如：/home/user 这个目录<br>相对路径：路径的写法不是由根目录（/）写起，例如：我当前所在目录 /home/user，我要切换到/home/user2 目录下。那么写法就是 cd ../user2，其实相对路径指的意思是：相对于当前目录的路径。</p>
+</blockquote>
+<br>
+
+<h2 id="目录的相关操作"><a href="#目录的相关操作" class="headerlink" title="目录的相关操作"></a>目录的相关操作</h2><h3 id="特殊的目录："><a href="#特殊的目录：" class="headerlink" title="特殊的目录："></a>特殊的目录：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.   //代表当前目录</span><br><span class="line">..  //代表上一次目录</span><br><span class="line">-   //代表前一个工作目录（其实就是上一个操作的目录）</span><br><span class="line">~   //代表当前用户的家目录，例如当前用户是user，那么user的家目录就是在/home/user下</span><br><span class="line">~username   //代表用户名为username的用户的家目录。</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="常见的处理目录的指令"><a href="#常见的处理目录的指令" class="headerlink" title="常见的处理目录的指令"></a>常见的处理目录的指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd     //切换目录</span><br><span class="line">pwd    //显示当前目录</span><br><span class="line">mkdir  //创建目录</span><br><span class="line">rmdir  //删除空目录，注意是空目录！不空的目录后面再讲</span><br></pre></td></tr></table></figure>
+
+<p>简单指令用法如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /home/user //使用绝对路径切换目录</span><br><span class="line">pwd           //显示当前所在目录，只会显示绝对路径</span><br><span class="line">mkdir dir     //创建一个名为dir的目录（可以理解为文件夹）</span><br><span class="line">rmdir dir     //删除一个名为dir的空目录</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="执行文件路径变量：-PATH"><a href="#执行文件路径变量：-PATH" class="headerlink" title="执行文件路径变量：$PATH"></a>执行文件路径变量：$PATH</h2><p>ls为查阅文件属性的指令，起对应完整文件名为：/bin/ls（这是绝对路径），那么为什么我们输入ls就会执行/bin/ls这个指令呢？这是因为环境变量PATH所致的。相当于我们Window下的环境变量path。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo $PATH   //打印PATH变量，$号后面接的是变量。</span><br><span class="line">/home/vagrant/bin:/home/vagrant/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</span><br></pre></td></tr></table></figure>
+
+<p>可以看到每个目录中间用冒号（:）来隔开，每个目录都会有顺序之分。我们之所以可以执行ls命令，那是因为ls指令存在/bin目录下，我们可以看到$PATH有/bin这个目录，所以ls指令就可以直接执行啦。<br>例举常用添加环境变量的两种方式，需要把/home/vagrant添加到环境变量：<br>1.只对当前用户生效：<br>修改家目录下的 .bashrc文件，然后在文件的最下方加入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/home/vagrant:$PATH</span><br><span class="line">///保存后执行</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>2.修改/etc/environment文件，直接使用vim命令在后面添加就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/environment //查看该文件</span><br><span class="line">PATH=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games&quot;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="文件与目录管理"><a href="#文件与目录管理" class="headerlink" title="文件与目录管理"></a>文件与目录管理</h1><p>文件与目录的管理，其实主要就是显示属性、复制、删除、移动等操作。<br>选项：</p>
+<h2 id="文件与目录的查看：ls"><a href="#文件与目录的查看：ls" class="headerlink" title="文件与目录的查看：ls"></a>文件与目录的查看：ls</h2><p><code>ls</code>可以说是最常用的指令了，而<code>ls</code>指令一些常用的选项如下：<br>-a : 列出全部文件，包括隐藏文件（开头为 . 的文件）<br>-d : 仅列出目录本身，而不列出目录内的文件数据<br>-l  : 列出的文件或目录，一个占一行，并且显示文件的属性、权限等等数据。<br>使用方式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -[options]</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="复制、删除与移动：cp-rm-mv"><a href="#复制、删除与移动：cp-rm-mv" class="headerlink" title="复制、删除与移动：cp,rm,mv"></a>复制、删除与移动：cp,rm,mv</h2><p><strong>cp（复制文件或目录）</strong><br><code>cp</code>指令也非常重要，因为我们也经常进行文件的复制，所以也会常常用到这个指令。如果要去复制别人的文件，我们必须有read（读）权限。一般来说复制别人的文件后，该文件的拥有者就会变成自己的啦。<br>常用选项：<br>-i : 若文件已经存在时，询问是否需要覆盖文件。<br>-p : 把文件的属性（权限、用户、时间）一起复制过去。<br>-r ：递归复制，例如复制非空的目录，就需要使用这个指令啦。</p>
+<p>使用方式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp [-options] 源文件 目标文件</span><br><span class="line">cp -i /usr/bin /tmp/bin //例子</span><br></pre></td></tr></table></figure>
+
+<br>
+**rm（移除文件和目录）**
+选项：
+ -f : 忽略不存在的文件，不会出现警告信息
+ -i : 执行删除动作时会询问你是否真的需要删除
+ -r : 递归删除，常用在目录的删除上，使用这命令要再三确认啊。危险！
+
+<p>使用方式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm [-options] 文件或目录</span><br></pre></td></tr></table></figure>
+
+<br>
+**mv（移动/更名 文件或目录）**
+相似于window下的剪切和重命名操作。
+选项：
+-f ：如果文件已存在，不会询问而只是直接覆盖。
+-i ：如果文件已存在，则会询问是否需要覆盖。
+-u ：如果文件已存在，且复制的文件比已存在的文件新，就会覆盖。
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv -[options] 源文件 目标文件</span><br><span class="line">mv /home/vagrant /tmp/vg  //此命令就会把home下vagrant目录移动到tmp目录下，并且改名为vg啦。</span><br></pre></td></tr></table></figure>
+
+<p>扩展：其实更名还有一个命令，叫做rename。需要详细了解的话可以 man rename看一看。<br><br></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2019/05/16/鸟哥Linux5-2/" rel="next" title="鸟哥的Linux私房菜笔记第五章-文件权限与目录配置（二）">
+                <i class="fa fa-chevron-left"></i> 鸟哥的Linux私房菜笔记第五章-文件权限与目录配置（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2019/07/21/鸟哥Linux6-2/" rel="prev" title="鸟哥的Linux私房菜笔记第六章-文件与目录管理（二）">
+                鸟哥的Linux私房菜笔记第六章-文件与目录管理（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Daftar Isi
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Ikhtisar
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Johnson</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">posting</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录与路径"><span class="nav-number">1.</span> <span class="nav-text">目录与路径</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#相对路径与绝对路径"><span class="nav-number">1.1.</span> <span class="nav-text">相对路径与绝对路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录的相关操作"><span class="nav-number">1.2.</span> <span class="nav-text">目录的相关操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊的目录："><span class="nav-number">1.2.1.</span> <span class="nav-text">特殊的目录：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的处理目录的指令"><span class="nav-number">1.2.2.</span> <span class="nav-text">常见的处理目录的指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行文件路径变量：-PATH"><span class="nav-number">1.3.</span> <span class="nav-text">执行文件路径变量：$PATH</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件与目录管理"><span class="nav-number">2.</span> <span class="nav-text">文件与目录管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件与目录的查看：ls"><span class="nav-number">2.1.</span> <span class="nav-text">文件与目录的查看：ls</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制、删除与移动：cp-rm-mv"><span class="nav-number">2.2.</span> <span class="nav-text">复制、删除与移动：cp,rm,mv</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Johnson</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Tema &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
