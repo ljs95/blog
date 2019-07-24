@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="InfluxDB,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言因当前的项目需要记录每秒钟服务器的状态信息，例如负载、cpu等等信息，这些数据都是和时间相关联的。因为一秒钟就要存储挺多的数据。而且我还在前端做了echart的折线图，使用websocket实时查看数据的变化。 方案第一次的方案第一次是很简单的，就是mysql建索引，在时间戳和其余两个条件查询比较多的字段建索引，然后最近一天的数据是存放到redis缓存当中的，一开始感觉还是不错的，所以查询实时">
+<meta name="keywords" content="InfluxDB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一次使用InfluxDB数据库的总结">
+<meta property="og:url" content="http://yoursite.com/2019/07/20/InfluxDB-1/index.html">
+<meta property="og:site_name" content="Johnson">
+<meta property="og:description" content="前言因当前的项目需要记录每秒钟服务器的状态信息，例如负载、cpu等等信息，这些数据都是和时间相关联的。因为一秒钟就要存储挺多的数据。而且我还在前端做了echart的折线图，使用websocket实时查看数据的变化。 方案第一次的方案第一次是很简单的，就是mysql建索引，在时间戳和其余两个条件查询比较多的字段建索引，然后最近一天的数据是存放到redis缓存当中的，一开始感觉还是不错的，所以查询实时">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-24T15:12:43.060Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一次使用InfluxDB数据库的总结">
+<meta name="twitter:description" content="前言因当前的项目需要记录每秒钟服务器的状态信息，例如负载、cpu等等信息，这些数据都是和时间相关联的。因为一秒钟就要存储挺多的数据。而且我还在前端做了echart的折线图，使用websocket实时查看数据的变化。 方案第一次的方案第一次是很简单的，就是mysql建索引，在时间戳和其余两个条件查询比较多的字段建索引，然后最近一天的数据是存放到redis缓存当中的，一开始感觉还是不错的，所以查询实时">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/20/InfluxDB-1/">
+
+
+
+
+
+  <title>一次使用InfluxDB数据库的总结 | Johnson</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Johnson</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一条小木木的个人网站</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/2019/07/20/InfluxDB-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Johnson">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/blog/images/zerro.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Johnson">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一次使用InfluxDB数据库的总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-20T17:24:06+08:00">
+                2019-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/DB/" itemprop="url" rel="index">
+                    <span itemprop="name">DB</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因当前的项目需要记录每秒钟服务器的状态信息，例如负载、cpu等等信息，这些数据都是和时间相关联的。<br>因为一秒钟就要存储挺多的数据。而且我还在前端做了echart的折线图，使用websocket实时查看数据的变化。<br><br></p>
+<h1 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h1><h2 id="第一次的方案"><a href="#第一次的方案" class="headerlink" title="第一次的方案"></a>第一次的方案</h2><p>第一次是很简单的，就是mysql建索引，在时间戳和其余两个条件查询比较多的字段建索引，然后最近一天的数据是存放到redis缓存当中的，<br>一开始感觉还是不错的，所以查询实时的数据还是挺快的，查询历史数据因为有索引的关系，所以速度也还可以。<br>但是随着数据量的增多，发现查询历史数据也逐渐变慢了，数据占用空间太大了，而且索引的占用空间竟然也非常的恐怖。<br><br></p>
+<h2 id="第二次的方案"><a href="#第二次的方案" class="headerlink" title="第二次的方案"></a>第二次的方案</h2><p>因为考虑到第一次的解决方案处理稍微有点复杂，并且数据占用空间大。就网上搜一搜有什么解决方案，一个时序数据库的文字进入了<br>我的猿眼。全称叫做时间序列数据库，主要用于带时间标签的数据，例如用于实时监控、设备采集所产生的数据。哦吼？搞一下。</p>
+<br>
+
+<h1 id="InfluxDb教程"><a href="#InfluxDb教程" class="headerlink" title="InfluxDb教程"></a>InfluxDb教程</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote>
+<p>官方网址：<br><a href="https://docs.influxdata.com/influxdb/v1.7/introduction/installation/" target="_blank" rel="noopener">https://docs.influxdata.com/influxdb/v1.7/introduction/installation/</a></p>
+</blockquote>
+<p>因为我用的是ubuntu18.04，所以下面就把ubuntu的安装教程写在这，其他的版本可以到官网上面看看。<br>添加InfluxData存储库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -</span><br><span class="line">source /etc/lsb-release</span><br><span class="line">echo &quot;deb https://repos.influxdata.com/$&#123;DISTRIB_ID,,&#125; $&#123;DISTRIB_CODENAME&#125; stable&quot; | sudo tee /etc/apt/sources.list.d/influxdb.list</span><br></pre></td></tr></table></figure>
+
+<p>安装并启动InfluxDb服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install influxdb</span><br><span class="line">sudo service influxdb start</span><br></pre></td></tr></table></figure>
+
+<p>到这一步你已经可以使用InfluxDB数据库啦，端口是8086,刚安装的InfluxDB是免密登录的，<br>如果开启身份验证就在配置文件下把<code>auto-enabled</code>选项设置为<code>true</code> ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[http]</span><br><span class="line">auth-enable = true</span><br></pre></td></tr></table></figure>
+
+<p>最后使用 <code>-config</code> 选项将进程指向配置文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">influxd -config /etc/influxdb/influxdb.conf</span><br></pre></td></tr></table></figure>
+
+<br>
+## 可视化工具InfluxDb Studio
+
+<blockquote>
+<p><a href="https://github.com/CymaticLabs/InfluxDBStudio" target="_blank" rel="noopener">https://github.com/CymaticLabs/InfluxDBStudio</a></p>
+</blockquote>
+<p>这个工具查询数据多的时候渲染会很卡，不要以为是查询数据慢了，<br>我一开始就是以为查的慢。再说一遍，端口是8086。<br><br></p>
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p>因为我用的是php，所以就使用了influxdb的php客户端</p>
+<blockquote>
+<p>php客户端入口：<br><a href="https://github.com/influxdata/influxdb-php" target="_blank" rel="noopener">https://github.com/influxdata/influxdb-php</a></p>
+</blockquote>
+<p>其它语言的客户端库可以在这里找：</p>
+<blockquote>
+<p><a href="https://docs.influxdata.com/influxdb/v1.7/tools/api_client_libraries/" target="_blank" rel="noopener">https://docs.influxdata.com/influxdb/v1.7/tools/api_client_libraries/</a></p>
+</blockquote>
+<p><strong>快速上手：</strong><br>composer 安装influxdb-php客户端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ composer require influxdb/influxdb-php</span><br></pre></td></tr></table></figure>
+
+<p>直接放php代码，注释和说明在代码里面写了，比较直接。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取客户端对象</span></span><br><span class="line">$client = <span class="keyword">new</span> \InfluxDB\Client(<span class="string">"127.0.0.1"</span>, <span class="number">8086</span>, <span class="string">"username"</span>, <span class="string">"password"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//选择数据库, 获取Database对象</span></span><br><span class="line">$database = $client-&gt;selectDB(<span class="string">"database_name"</span>);</span><br><span class="line">$points = [ </span><br><span class="line">    <span class="keyword">new</span> Point(<span class="string">"table_name"</span>, <span class="number">3</span>, <span class="comment">//第一个参数为表名， 第二个参数为值</span></span><br><span class="line">        [</span><br><span class="line">            <span class="string">"tags"</span> =&gt; <span class="number">1</span>, <span class="comment">//标签值</span></span><br><span class="line">        ],</span><br><span class="line">        [</span><br><span class="line">            <span class="string">'fields'</span> =&gt; <span class="number">1</span> <span class="comment">//字段</span></span><br><span class="line">        ],</span><br><span class="line">        time()), <span class="comment">//最后一个为时间戳</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">//写入数据, 第一个参数为写入的数据，第二个参数为时间戳的精度，这里我们使用秒精度</span></span><br><span class="line">$database-&gt;writePoints($points, Database::PRECISION_SECONDS);</span><br></pre></td></tr></table></figure>
+
+<p>查询方式分两种，第一种则是直接使用sql查询</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$database-&gt;query(<span class="string">"select * from table_name where time &gt; 1563602406s"</span>, [</span><br><span class="line">    <span class="string">"epoch"</span> =&gt; <span class="string">"s"</span> <span class="comment">//让返回的时间格式为秒精度的时间戳，</span></span><br><span class="line">])-&gt;getPoints(); <span class="comment">//返回的数组集合</span></span><br></pre></td></tr></table></figure>
+
+<p>sql是不是有点奇怪呢？因为数据保存的时候InfluxDB是按照自己的格式存储的，如果要用秒时间戳作为条件查询，就要这样写啦，<br>在api文档里面有说明</p>
+<blockquote>
+<p>api文档的快捷入口：<br><a href="https://docs.influxdata.com/influxdb/v1.7/tools/api/" target="_blank" rel="noopener">https://docs.influxdata.com/influxdb/v1.7/tools/api/</a></p>
+</blockquote>
+<p>第二种则是使用<code>Builder</code>查询，其实就是帮你把要查询的操作封装起来，到最后解析成SQL，最后再调用方式一的<code>query</code>方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//2.使用Builder查询</span><br><span class="line">$builde = $database-&gt;getQueryBuilder();</span><br><span class="line">$builde-&gt;select(&quot;*&quot;) //查询字段</span><br><span class="line">    -&gt;from(&quot;table_name&quot;) //表名</span><br><span class="line">    -&gt;setTimeRange(1563602406, 1563602806) //筛选时间范围</span><br><span class="line">    -&gt;where([&quot;type = 1&quot;]) //查询条件</span><br><span class="line">    -&gt;getResultSet() //里面其实就是调用了方式1的$database-&gt;query方法。</span><br><span class="line">    -&gt;getPoints(); //返回数组集合</span><br></pre></td></tr></table></figure>
+
+<p><code>setTimeRange</code>筛选时间范围这个方法需要注意，如果安装InfluxDB的机器（虚拟机）和你开发中机器的时区不同，<br>就不要用了，因为他提前把时间格式化为<code>Y-m-d H:i:s</code>，然后再拿这个时间去不同时区的机器那里查询。数据肯定不对。<br>好了，到这里简单入门就差不多啦。<br><br></p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>总结自己的学习过程还是蛮不错的，每一次学习到新东西，都感觉到提升了自我价值。但是如果不用记录下来的话，<br>总感觉少了点什么。好像过不久就会忘掉一样，所以学到新东西感觉还是记录下来比较心安，嘿嘿。<br>文章中若有不足之处，请各位在下面评论区留下。Thanks♪(･ω･)ﾉ</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/InfluxDB/" rel="tag"># InfluxDB</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2019/07/12/网站实现markdown/" rel="next" title="网站实现markdown功能">
+                <i class="fa fa-chevron-left"></i> 网站实现markdown功能
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2019/07/21/鸟哥Linux6-2/" rel="prev" title="鸟哥的Linux私房菜笔记第六章-文件与目录管理（二）">
+                鸟哥的Linux私房菜笔记第六章-文件与目录管理（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/blog/images/zerro.jpg" alt="Johnson">
+            
+              <p class="site-author-name" itemprop="name">Johnson</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/blog/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方案"><span class="nav-number">2.</span> <span class="nav-text">方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一次的方案"><span class="nav-number">2.1.</span> <span class="nav-text">第一次的方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二次的方案"><span class="nav-number">2.2.</span> <span class="nav-text">第二次的方案</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#InfluxDb教程"><span class="nav-number">3.</span> <span class="nav-text">InfluxDb教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">3.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端"><span class="nav-number">3.2.</span> <span class="nav-text">客户端</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Johnson</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

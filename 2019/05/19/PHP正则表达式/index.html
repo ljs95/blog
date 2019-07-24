@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="正则表达式,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言不知道你们有没有这个感觉，看正则表达式就像看天文数字一样，什么电话号码、邮箱的正则表达式，上网复制一下粘贴下来就搞定了。完全不知道这写的是什么玩意。后来我自己也想学一下，因为感觉用处还是挺大的。看了看视频，额…真**简单。这里的话如果想看视频学习的话我推荐一下慕课网这门鬼斧神工之正则表达式课程，上手真的太快了。好了，废话不多说，开始搞事情。 基本语法界定符：标识一个正则表达式的开始和结束，用’">
+<meta name="keywords" content="正则表达式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP正则表达式">
+<meta property="og:url" content="http://yoursite.com/2019/05/19/PHP正则表达式/index.html">
+<meta property="og:site_name" content="Johnson">
+<meta property="og:description" content="前言不知道你们有没有这个感觉，看正则表达式就像看天文数字一样，什么电话号码、邮箱的正则表达式，上网复制一下粘贴下来就搞定了。完全不知道这写的是什么玩意。后来我自己也想学一下，因为感觉用处还是挺大的。看了看视频，额…真**简单。这里的话如果想看视频学习的话我推荐一下慕课网这门鬼斧神工之正则表达式课程，上手真的太快了。好了，废话不多说，开始搞事情。 基本语法界定符：标识一个正则表达式的开始和结束，用’">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-24T15:18:10.038Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP正则表达式">
+<meta name="twitter:description" content="前言不知道你们有没有这个感觉，看正则表达式就像看天文数字一样，什么电话号码、邮箱的正则表达式，上网复制一下粘贴下来就搞定了。完全不知道这写的是什么玩意。后来我自己也想学一下，因为感觉用处还是挺大的。看了看视频，额…真**简单。这里的话如果想看视频学习的话我推荐一下慕课网这门鬼斧神工之正则表达式课程，上手真的太快了。好了，废话不多说，开始搞事情。 基本语法界定符：标识一个正则表达式的开始和结束，用’">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/19/PHP正则表达式/">
+
+
+
+
+
+  <title>PHP正则表达式 | Johnson</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Johnson</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一条小木木的个人网站</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/2019/05/19/PHP正则表达式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Johnson">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/blog/images/zerro.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Johnson">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP正则表达式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-19T13:40:14+08:00">
+                2019-05-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>不知道你们有没有这个感觉，看正则表达式就像看天文数字一样，什么电话号码、邮箱的正则表达式，上网复制一下粘贴下来就搞定了。完全不知道这写的是什么玩意。后来我自己也想学一下，因为感觉用处还是挺大的。看了看视频，额…真**简单。这里的话如果想看视频学习的话我推荐一下慕课网这门<a href="https://www.imooc.com/learn/350" target="_blank" rel="noopener">鬼斧神工之正则表达式</a>课程，上手真的太快了。好了，废话不多说，开始搞事情。</p>
+<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h1><h2 id="界定符："><a href="#界定符：" class="headerlink" title="界定符："></a>界定符：</h2><p>标识一个正则表达式的开始和结束，用’/‘或’#’或’{ }’,因为语法’{ }’也可能是正则表达式的运算符，为了避免混淆，所以不建议使用。建议的用法如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$pattern = <span class="string">'/[0-9]/'</span>;  <span class="comment">//我喜欢这个，看起来比较简洁 </span></span><br><span class="line">$pattern = <span class="string">'#[0-9]#'</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="原子："><a href="#原子：" class="headerlink" title="原子："></a>原子：</h2><blockquote>
+<p><strong>可见原子</strong>：Unicode编码表中可用键盘输出后肉眼可见的字符，例如：标点 ; . / ? 或者英文字母，汉字等等可见字符<br><strong>不可见原子</strong>：Unicode编码表中可用键盘输出后肉眼不可见的字符，例如：换行符 \n，Tab制表符\t, 空格等等，<br>   一般只用这三个（换行符一般和其他字符一起匹配，因为只有换行符是匹配不到的）<br>小提示：匹配运算符前面需要加<code>&#39;\&#39;</code> 例如：’+’ 号，匹配的话需要写出 <code>&#39;\+&#39;</code></p>
+</blockquote>
+<h2 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h2><p> <strong>原子的筛选方式：</strong></p>
+<blockquote>
+<p>| 匹配两个或者多个分支选择<br>[] 匹配方括号中的任意一个原子<br>[^] 匹配除方括号中的原子之外的任意字符；<br>例子：Duang|duang 或者 [Dd]uang 都可以匹配到Duang和duang<br>   区间写法：[a-z]匹配a到z的字符, [0-9]匹配0到9的字符。也可以[a-z0-9]<br>. 匹配除换行符之外的任意字符<br>\d 匹配任意一个十进制数字，即{0-9]<br>\D 匹配任意一个非十进制数字[^0-9] 相当于[^\d]<br>\s 匹配一个不可见的原子，即[\f\n\r\t\v]<br>\S 匹配一个可见的原子，即[^\f\n\r\t\v],相当于[^\s]z<br>\w 匹配任意一个数字、字母或下划线，即[0-9a-zA-Z_]<br>\W 匹配任意一个非数字、字母或下划线，[^0-9a-zA-Z_]，相当于[^\w]</p>
+</blockquote>
+<h2 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h2><blockquote>
+<p>{n} 表示其前面的原子刚好出现了n次。<br>[n] 表示其前面的原子最少出现n次<br>{n,m} 最少出现n次，最多出现m次<br><code>*</code> 匹配0次、一次或者多次，即{0,}<br><code>+</code> 匹配一次或多次,即{1,}<br><code>?</code> 匹配0或1次，即{0,1}</p>
+</blockquote>
+<h2 id="边界控制"><a href="#边界控制" class="headerlink" title="边界控制"></a>边界控制</h2><blockquote>
+<p>^ 匹配字符串开始的位置<br>$ 匹配字符串结尾的位置<br>例：^John 可以匹配到:John 但是匹配不到:123John,因为规定了字符串以John开头</p>
+</blockquote>
+<h2 id="模式单元"><a href="#模式单元" class="headerlink" title="模式单元"></a>模式单元</h2><blockquote>
+<p>{} 匹配其中的整体为一个原子     </p>
+</blockquote>
+<p><br><br></p>
+<h1 id="修正模式"><a href="#修正模式" class="headerlink" title="修正模式"></a>修正模式</h1><h2 id="贪婪匹配"><a href="#贪婪匹配" class="headerlink" title="贪婪匹配"></a>贪婪匹配</h2><blockquote>
+<p>匹配结果存在歧义时取其长（默认）</p>
+</blockquote>
+<h2 id="懒惰匹配"><a href="#懒惰匹配" class="headerlink" title="懒惰匹配"></a>懒惰匹配</h2><blockquote>
+<p>匹配结果存在歧义时取其短，只需在正则表达式的后面’/‘加上’U’，例如’/[0-9]/U’;<br>例子：</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$subject = <span class="string">"test__123123123"</span>;</span><br><span class="line">preg_match(<span class="string">'/test.+123/'</span>, $subject, $matches); <span class="comment">//贪婪模式  </span></span><br><span class="line">var_dump($matches);</span><br><span class="line">preg_match(<span class="string">'/test.+123/U'</span>, $subject, $matches); <span class="comment">//懒惰模式</span></span><br><span class="line">var_dump($matches);</span><br></pre></td></tr></table></figure>
+
+<h2 id="常见的修正模式："><a href="#常见的修正模式：" class="headerlink" title="常见的修正模式："></a>常见的修正模式：</h2><blockquote>
+<p>U 懒惰匹配<br>i 忽略英文字母的大小写<br>x 忽略正则表达式的空白符<br>s 让元字符’.’ 匹配包括换行符在内的所有字符  </p>
+</blockquote>
+<p><br><br></p>
+<h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><h2 id="preg-match"><a href="#preg-match" class="headerlink" title="preg_match"></a>preg_match</h2><p> 执行匹配正则表达式</p>
+<blockquote>
+<p>preg_match ( string $pattern , string $subject [, array &amp;$matches [, int $flags = 0 [, int $offset = 0 ]]] ) : int  </p>
+<ul>
+<li>pattern: 要搜索的模式，字符串类型。</li>
+<li>subject：输入字符串。</li>
+<li>match： 如果提供了参数matches，它将被填充为搜索结果,数据结构为一维数组。</li>
+<li>flags: 可以设置为PREG_OFFSET_CAPTURE，使用搜索结果的第0个元素为匹配的字符串，第1个元素为对应的偏移量（位置）</li>
+<li>offset: 搜索从目标字符串的起始位置开始匹配。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>返回值：匹配次数<br>类似函数<code>preg_match_all</code>，参数与<code>preg_match</code>一致<br>区别：</p>
+<ul>
+<li><code>preg_match</code>：只匹配一次，搜索结构match的数据结果为一维数组</li>
+<li><code>preg_match_all</code>：匹配全部，搜索结果match的数据结构为二维数组。</li>
+</ul>
+</blockquote>
+<h2 id="preg-replace"><a href="#preg-replace" class="headerlink" title="preg_replace"></a>preg_replace</h2><p>执行一个正则表达式搜索和替换，返回值为替换后的字符串</p>
+<blockquote>
+<p>preg_replace ( mixed $pattern , mixed $replacement , mixed $subject [, int $limit = -1 [, int &amp;$count ]] ) : mixed</p>
+<ul>
+<li>pattern：要搜索的模式。可以是一个字符串或字符串数组。</li>
+<li>replacement：用于替换的字符串或字符串数组</li>
+<li>subject：要进行搜索和替换的字符串或字符串数组。</li>
+<li>limit：替换的最大次数。默认是 -1(无限)。</li>
+<li>count：替换次数。<br>类似函数<code>preg_filter</code>，参数与<code>preg_replace</code>一致<br>区别(使用数组进行匹配的时候才看得出区别)：</li>
+<li><code>preg_replace</code>：不管是否有替换，返回全部结果</li>
+<li><code>preg_filter</code>：只返回匹配的结果。</li>
+</ul>
+</blockquote>
+<h2 id="preg-split"><a href="#preg-split" class="headerlink" title="preg_split"></a>preg_split</h2><p>通过一个正则表达式分隔字符串</p>
+<blockquote>
+<p>preg_split ( string $pattern , string $subject [, int $limit = -1 [, int $flags = 0 ]] ) : array</p>
+<ul>
+<li>$pattrn：用于搜索的模式，字符串形式。</li>
+<li>subject：输入字符串</li>
+<li>limit：将限制分隔得到的子串最多只有limit个，返回的最后一个 子串将包含所有剩余部分。</li>
+<li>flags：有以下标记的组合：  </li>
+<li><ul>
+<li><ol>
+<li><code>PREG_SPLIT_NO_EMPTY</code>: 返回分隔后的非空部分。  </li>
+</ol>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ol start="2">
+<li><code>PREG_SPLIT_DELIM_CAPTURE</code>: 用分隔符’()’括号把匹配的捕获并返回。  </li>
+</ol>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ol start="3">
+<li><code>PREG_SPLIT_OFFSET_CAPTURE</code>： 匹配返回时将会附加字符串偏移量  </li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><code>PREG_SPLIT_DELIM_CAPTURE</code>这个参数可能比较难明白，举个例子看看：  </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$subject = <span class="string">"1a23b"</span>;  </span><br><span class="line">$a = preg_split(<span class="string">'/[\d]/'</span>, $subject, <span class="number">-1</span>, PREG_SPLIT_NO_EMPTY);  </span><br><span class="line">var_dump($a);  </span><br><span class="line">$a = preg_split(<span class="string">'/([\d])/'</span>, $subject, <span class="number">-1</span>, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE); </span><br><span class="line">var_dump($a);</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：  </p>
+<blockquote>
+<p>array (size=2)<br> 0 =&gt; string ‘a’ (length=1)<br> 1 =&gt; string ‘b’ (length=1)<br>array (size=5)<br> 0 =&gt; string ‘1’ (length=1)<br> 1 =&gt; string ‘a’ (length=1)<br> 2 =&gt; string ‘2’ (length=1)<br> 3 =&gt; string ‘3’ (length=1)<br> 4 =&gt; string ‘b’ (length=1)</p>
+</blockquote>
+<h2 id="preg-grep"><a href="#preg-grep" class="headerlink" title="preg_grep"></a>preg_grep</h2><p>返回匹配模式的数组条目</p>
+<blockquote>
+<p>preg_grep ( string $pattern , array $input [, int $flags = 0 ] ) : array</p>
+<ul>
+<li>$pattern：要搜索的模式，字符串形式</li>
+<li>$input：输入数组</li>
+<li>flags：如果不设置则返回匹配的数目，设置<code>PREG_GREP_INVERT</code>则返回不匹配的数目。</li>
+</ul>
+</blockquote>
+<h2 id="preg-quote"><a href="#preg-quote" class="headerlink" title="preg_quote"></a>preg_quote</h2><p>转义正则表达式字符，返回为转义后的字符串</p>
+<blockquote>
+<p>preg_quote ( string $str [, string $delimiter = NULL ] ) : string</p>
+<ul>
+<li>str：输入字符串</li>
+<li>delimiter：需要转义的字符串</li>
+</ul>
+</blockquote>
+<br>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/正则表达式/" rel="tag"># 正则表达式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2019/05/16/鸟哥Linux5-2/" rel="next" title="鸟哥的Linux私房菜笔记第五章-文件权限与目录配置（二）">
+                <i class="fa fa-chevron-left"></i> 鸟哥的Linux私房菜笔记第五章-文件权限与目录配置（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2019/06/01/鸟哥Linux6-1/" rel="prev" title="鸟哥的Linux私房菜笔记第六章-文件与目录管理（一）">
+                鸟哥的Linux私房菜笔记第六章-文件与目录管理（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/blog/images/zerro.jpg" alt="Johnson">
+            
+              <p class="site-author-name" itemprop="name">Johnson</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/blog/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本语法"><span class="nav-number">2.</span> <span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#界定符："><span class="nav-number">2.1.</span> <span class="nav-text">界定符：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原子："><span class="nav-number">2.2.</span> <span class="nav-text">原子：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元字符"><span class="nav-number">2.3.</span> <span class="nav-text">元字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#量词"><span class="nav-number">2.4.</span> <span class="nav-text">量词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#边界控制"><span class="nav-number">2.5.</span> <span class="nav-text">边界控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模式单元"><span class="nav-number">2.6.</span> <span class="nav-text">模式单元</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修正模式"><span class="nav-number">3.</span> <span class="nav-text">修正模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#贪婪匹配"><span class="nav-number">3.1.</span> <span class="nav-text">贪婪匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#懒惰匹配"><span class="nav-number">3.2.</span> <span class="nav-text">懒惰匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的修正模式："><span class="nav-number">3.3.</span> <span class="nav-text">常见的修正模式：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用函数"><span class="nav-number">4.</span> <span class="nav-text">常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#preg-match"><span class="nav-number">4.1.</span> <span class="nav-text">preg_match</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#preg-replace"><span class="nav-number">4.2.</span> <span class="nav-text">preg_replace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#preg-split"><span class="nav-number">4.3.</span> <span class="nav-text">preg_split</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#preg-grep"><span class="nav-number">4.4.</span> <span class="nav-text">preg_grep</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#preg-quote"><span class="nav-number">4.5.</span> <span class="nav-text">preg_quote</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Johnson</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
