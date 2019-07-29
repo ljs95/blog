@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Johnson">
 <meta property="og:description" content="前言因公司项目的需求，需要对客户端机器简便使用防火墙的功能，所以可在页面进行简便设置防护墙规则，当然，这个功能需求放到我手上我才有机会学到。因为客户端机器都是ubuntu的，所以当然用了ubuntu特有且简便的防火墙设置规则，那就是ufw，文章以ubuntu16.04为准，其它版本的用法应该也差不太多。本文着重介绍其常用的用法，至于其他的用法那就要等各位小伙伴再自行研究了。 wiki UFW 全称">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-29T13:29:07.286Z">
+<meta property="og:updated_time" content="2019-07-29T13:44:16.412Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu防火墙规则之ufw">
 <meta name="twitter:description" content="前言因公司项目的需求，需要对客户端机器简便使用防火墙的功能，所以可在页面进行简便设置防护墙规则，当然，这个功能需求放到我手上我才有机会学到。因为客户端机器都是ubuntu的，所以当然用了ubuntu特有且简便的防火墙设置规则，那就是ufw，文章以ubuntu16.04为准，其它版本的用法应该也差不太多。本文着重介绍其常用的用法，至于其他的用法那就要等各位小伙伴再自行研究了。 wiki UFW 全称">
@@ -346,7 +346,7 @@
 <h2 id="wiki"><a href="#wiki" class="headerlink" title="wiki"></a>wiki</h2><p> UFW 全称为Uncomplicated Firewall，是Ubuntu 系统上默认的防火墙组件, 为了轻量化配置iptables 而开发的一款工具。 UFW 提供一个非常友好的界面用于创建基于IPV4，IPV6的防火墙规则。</p>
 <br>
 # ufw使用教程
-使用ufw的命令必须有管理员权限才可运行，没有的话就要sudo以下了，不过要注意安全，不能瞎搞哈。。。
+使用ufw的命令必须有管理员权限才可运行，没有的话就要sudo一下了，不过要注意安全，不能瞎搞哈。。。
 
 <h2 id="开启和禁用"><a href="#开启和禁用" class="headerlink" title="开启和禁用"></a>开启和禁用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># ufw enable //开启防火墙</span><br><span class="line"># ufw disable //禁用防火墙</span><br><span class="line"># ufw reset //重置防火墙，会把你所有已添加的规则全部删除，并且禁用防火墙</span><br></pre></td></tr></table></figure>
 
@@ -375,7 +375,7 @@
 <p>添加允许192.168.0.2 的22端口tcp协议（ssh）的规则</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ufw allow proto tcp from 192.168.0.2 port 22</span><br></pre></td></tr></table></figure>
 
-<p>若你的系统上有帮他人进行转发信息的进程，那么你可以允许来自某个源IP地址发送信息到某个目标地址，例允许源IP地址192.168.0.2的8088端口 发送到 目标地址192.162.0.2的8080端口</p>
+<p>若你的系统上有帮他人进行转发信息的进程，那么你可以允许来自某个源IP地址发送信息到某个目标地址，例：允许源IP地址192.168.0.2的8088端口 发送到 目标地址192.162.0.2的8080端口</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ufw allow from 192.168.0.2 port 80 to 192.168.0.2 port 8080</span><br></pre></td></tr></table></figure>
 
 <br>
