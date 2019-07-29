@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux,防火墙,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言因公司项目的需求，需要对客户端机器简便使用防火墙的功能，所以可在页面进行简便设置防护墙规则，当然，这个功能需求放到我手上我才有机会学到。因为客户端机器都是ubuntu的，所以当然用了ubuntu特有且简便的防火墙设置规则，那就是ufw，文章以ubuntu16.04为准，其它版本的用法应该也差不太多。本文着重介绍其常用的用法，至于其他的用法那就要等各位小伙伴再自行研究了。 wiki UFW 全称">
+<meta name="keywords" content="Linux,防火墙">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu防火墙规则之ufw">
+<meta property="og:url" content="http://yoursite.com/2019/07/29/ubuntu-ufw/index.html">
+<meta property="og:site_name" content="Johnson">
+<meta property="og:description" content="前言因公司项目的需求，需要对客户端机器简便使用防火墙的功能，所以可在页面进行简便设置防护墙规则，当然，这个功能需求放到我手上我才有机会学到。因为客户端机器都是ubuntu的，所以当然用了ubuntu特有且简便的防火墙设置规则，那就是ufw，文章以ubuntu16.04为准，其它版本的用法应该也差不太多。本文着重介绍其常用的用法，至于其他的用法那就要等各位小伙伴再自行研究了。 wiki UFW 全称">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-29T13:29:07.286Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ubuntu防火墙规则之ufw">
+<meta name="twitter:description" content="前言因公司项目的需求，需要对客户端机器简便使用防火墙的功能，所以可在页面进行简便设置防护墙规则，当然，这个功能需求放到我手上我才有机会学到。因为客户端机器都是ubuntu的，所以当然用了ubuntu特有且简便的防火墙设置规则，那就是ufw，文章以ubuntu16.04为准，其它版本的用法应该也差不太多。本文着重介绍其常用的用法，至于其他的用法那就要等各位小伙伴再自行研究了。 wiki UFW 全称">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/29/ubuntu-ufw/">
+
+
+
+
+
+  <title>ubuntu防火墙规则之ufw | Johnson</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Johnson</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一条小木木的个人网站</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/29/ubuntu-ufw/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Johnson">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/zerro.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Johnson">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ubuntu防火墙规则之ufw</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-29T21:19:27+08:00">
+                2019-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因公司项目的需求，需要对客户端机器简便使用防火墙的功能，所以可在页面进行简便设置防护墙规则，当然，这个功能需求放到我手上我才有机会学到。因为客户端机器都是ubuntu的，所以当然用了ubuntu特有且简便的防火墙设置规则，那就是ufw，文章以ubuntu16.04为准，其它版本的用法应该也差不太多。本文着重介绍其常用的用法，至于其他的用法那就要等各位小伙伴再自行研究了。</p>
+<h2 id="wiki"><a href="#wiki" class="headerlink" title="wiki"></a>wiki</h2><p> UFW 全称为Uncomplicated Firewall，是Ubuntu 系统上默认的防火墙组件, 为了轻量化配置iptables 而开发的一款工具。 UFW 提供一个非常友好的界面用于创建基于IPV4，IPV6的防火墙规则。</p>
+<br>
+# ufw使用教程
+使用ufw的命令必须有管理员权限才可运行，没有的话就要sudo以下了，不过要注意安全，不能瞎搞哈。。。
+
+<h2 id="开启和禁用"><a href="#开启和禁用" class="headerlink" title="开启和禁用"></a>开启和禁用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># ufw enable //开启防火墙</span><br><span class="line"># ufw disable //禁用防火墙</span><br><span class="line"># ufw reset //重置防火墙，会把你所有已添加的规则全部删除，并且禁用防火墙</span><br></pre></td></tr></table></figure>
+
+<p>可以使用以下命令查看ufw防火墙的状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># ufw status</span><br><span class="line">// 没开启是这个样子的</span><br><span class="line">Status: inactive  </span><br><span class="line"></span><br><span class="line">//开启后是这样子的</span><br><span class="line">Status: active</span><br><span class="line">...  // 如果你添加了防火墙规则下面这里就会显示</span><br></pre></td></tr></table></figure>
+
+<p>设置默认的防火墙规则，默认为允许，就是说什么玩意都允许你连进来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># ufw default allow|deny  //设置默认规则</span><br><span class="line">allow : 允许</span><br><span class="line">deny : 拒绝</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="协议规则"><a href="#协议规则" class="headerlink" title="协议规则"></a>协议规则</h2><p>协议规则就是有关于协议的一些防火墙规则。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ufw [delete] [insert NUM]  allow|deny [in|out]  [PORT[/PROTOCOL] ]  [comment COMMENT]</span><br><span class="line"></span><br><span class="line">delete : 删除这个规则</span><br><span class="line">insert : Num代表你要插入到防火墙规则的那个位置，规则是有序排列的。会根据需要来一个个检查</span><br><span class="line">allow|deny : 这条规则是允许的还是禁用的</span><br><span class="line">in|out: 这条规则对发送还是接收数据生效</span><br><span class="line">PORT: 端口号</span><br><span class="line">protocol : 协议，例如TCP还是UDP</span><br><span class="line">comment : 注释</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>添加一条允许ssh的规则(ssh的端口号是22，协议是TCP)，并且插入到位置2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ufw insert 2 allow in 22/tcp</span><br></pre></td></tr></table></figure>
+
+<p>禁用22端口连入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ufw deny in 22</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="ip规则"><a href="#ip规则" class="headerlink" title="ip规则"></a>ip规则</h2><p>ip规则里面可以包含端口号和协议，反过来则不行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ufw  [delete]  [insert  NUM]  allow|deny  [in|out  [on INTERFACE]] [proto PROTOCOL] </span><br><span class="line">[from ADDRESS [port PORT]]  [to ADDRESS [port PORT]] [comment COMMENT]</span><br><span class="line"></span><br><span class="line">INTERFACE ：网卡，就是针对哪个网卡生效，可以使用ifconfig或ip addr查看你的网卡</span><br><span class="line">form ADDRESS  : 源IP地址</span><br><span class="line">to ADDRESS : 目标IP地址</span><br><span class="line">PORT : 跟在源IP地址后面就是源IP地址的端口号，反之则是目标IP地址的端口号</span><br><span class="line">其他的都和协议规则的一致</span><br></pre></td></tr></table></figure>
+
+<p>添加允许192.168.0.2 的22端口tcp协议（ssh）的规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ufw allow proto tcp from 192.168.0.2 port 22</span><br></pre></td></tr></table></figure>
+
+<p>若你的系统上有帮他人进行转发信息的进程，那么你可以允许来自某个源IP地址发送信息到某个目标地址，例允许源IP地址192.168.0.2的8088端口 发送到 目标地址192.162.0.2的8080端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ufw allow from 192.168.0.2 port 80 to 192.168.0.2 port 8080</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="删除规则"><a href="#删除规则" class="headerlink" title="删除规则"></a>删除规则</h2><p>删除规则分两种，一种是根据规则的内容删除，一种是根据序号删除</p>
+<h3 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h3><p>刚才添加规则的命令前面添加<code>delete</code>参数，例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># ufw allow 22/tcp //添加一条允许ssh的规则</span><br><span class="line"># ufw delete allow 22/tcp //删除ssh规则</span><br></pre></td></tr></table></figure>
+
+<h3 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h3><p>根据序号删除，怎么知道规则的序号呢？使用ufw status numbered</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># ufw status numbered //查</span><br><span class="line">Status: active</span><br><span class="line"></span><br><span class="line">     To                         Action      From</span><br><span class="line">     --                         ------      ----</span><br><span class="line">[ 1] 22                         ALLOW IN    Anywhere</span><br></pre></td></tr></table></figure>
+
+<p>我需要删除第一条规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ufw delete 1 //这样就是删除第一条规则啦</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="推荐设置"><a href="#推荐设置" class="headerlink" title="推荐设置"></a>推荐设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># ufw enbale //开启防火墙</span><br><span class="line"># ufw alllow ssh // 添加ssh的规则，这是简写规则</span><br><span class="line"># ufw default deny //设置默认为禁用，但是我们已经添加了ssh规则，就不担心。</span><br><span class="line">后面这里你们就可以自己搞事情啦！</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>好了，以上讲的都是比较基本的用法，想要深入了解的话可以自行到官网上看看，后面会出一章关于iptables的防火墙规则，ufw就是基于iptables上进行封装的，iptables适用于所有Linux系统哦，不单单是只有Ubuntu了。这篇文章到此结束，感谢各位小伙伴的阅读，Thanks♪(･ω･)ﾉ</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat.jpg" alt="Johnson wechat" style="width: 200px; max-width: 100%;">
+    <div>这个是我的个人微信公众号，喜欢的我的文章的朋友可以关注一下，谢谢</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Johnson
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/07/29/ubuntu-ufw/" title="ubuntu防火墙规则之ufw">http://yoursite.com/2019/07/29/ubuntu-ufw/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/防火墙/" rel="tag"># 防火墙</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/21/鸟哥Linux6-2/" rel="next" title="鸟哥的Linux私房菜笔记第六章-文件与目录管理（二）">
+                <i class="fa fa-chevron-left"></i> 鸟哥的Linux私房菜笔记第六章-文件与目录管理（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/zerro.jpg" alt="Johnson">
+            
+              <p class="site-author-name" itemprop="name">Johnson</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.cnblogs.com/Johnson-lin/" target="_blank" title="博客园">
+                      
+                        <i class="fa fa-fw fa-globe"></i>博客园</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#wiki"><span class="nav-number">1.1.</span> <span class="nav-text">wiki</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启和禁用"><span class="nav-number">1.2.</span> <span class="nav-text">开启和禁用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协议规则"><span class="nav-number">1.3.</span> <span class="nav-text">协议规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ip规则"><span class="nav-number">1.4.</span> <span class="nav-text">ip规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除规则"><span class="nav-number">1.5.</span> <span class="nav-text">删除规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方式一"><span class="nav-number">1.5.1.</span> <span class="nav-text">方式一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式二"><span class="nav-number">1.5.2.</span> <span class="nav-text">方式二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐设置"><span class="nav-number">1.6.</span> <span class="nav-text">推荐设置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="/lib/busuanzi/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; Thu Jul 25 2019 08:00:00 GMT+0800 (GMT+08:00) &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Johnson</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
