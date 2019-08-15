@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言该文章主要为了记录我如何在GitPage上面部署博客网站，这里的话，码云上面也有相同的功能，若有小伙伴担心GitHub担心把中国的访问也禁了的话（大概不会吧），可以上码云上面部署。流程应该是差不多的。因为我使用的域名是.cn后缀，所以部署到GitHub上面就不用备案了。码云是国内的，应该要备案了，这个就看各位小伙伴的选择了。可以看看我的网站哦，  https://colablog.cn/  开">
+<meta property="og:type" content="article">
+<meta property="og:title" content="部署GitPage">
+<meta property="og:url" content="http://yoursite.com/2019/08/14/部署GitPage/index.html">
+<meta property="og:site_name" content="Johnson">
+<meta property="og:description" content="前言该文章主要为了记录我如何在GitPage上面部署博客网站，这里的话，码云上面也有相同的功能，若有小伙伴担心GitHub担心把中国的访问也禁了的话（大概不会吧），可以上码云上面部署。流程应该是差不多的。因为我使用的域名是.cn后缀，所以部署到GitHub上面就不用备案了。码云是国内的，应该要备案了，这个就看各位小伙伴的选择了。可以看看我的网站哦，  https://colablog.cn/  开">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pvhmagcvg.bkt.clouddn.com/hexo-server%E5%90%AF%E5%8A%A8%E9%A1%B5%E9%9D%A2.jpg">
+<meta property="og:image" content="http://pvhmagcvg.bkt.clouddn.com/next%E4%B8%BB%E9%A2%98.jpg">
+<meta property="og:image" content="http://pvhmagcvg.bkt.clouddn.com/GitPage-1.jpg">
+<meta property="og:updated_time" content="2019-08-15T14:22:25.768Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="部署GitPage">
+<meta name="twitter:description" content="前言该文章主要为了记录我如何在GitPage上面部署博客网站，这里的话，码云上面也有相同的功能，若有小伙伴担心GitHub担心把中国的访问也禁了的话（大概不会吧），可以上码云上面部署。流程应该是差不多的。因为我使用的域名是.cn后缀，所以部署到GitHub上面就不用备案了。码云是国内的，应该要备案了，这个就看各位小伙伴的选择了。可以看看我的网站哦，  https://colablog.cn/  开">
+<meta name="twitter:image" content="http://pvhmagcvg.bkt.clouddn.com/hexo-server%E5%90%AF%E5%8A%A8%E9%A1%B5%E9%9D%A2.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/14/部署GitPage/">
+
+
+
+
+
+  <title>部署GitPage | Johnson</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Johnson</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一条小木木的个人网站</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/14/部署GitPage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Johnson">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/zerro.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Johnson">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">部署GitPage</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-14T21:06:06+08:00">
+                2019-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k 字数
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>该文章主要为了记录我如何在GitPage上面部署博客网站，这里的话，码云上面也有相同的功能，<br>若有小伙伴担心GitHub担心把中国的访问也禁了的话（大概不会吧），可以上码云上面部署。流程应该<br>是差不多的。因为我使用的域名是.cn后缀，所以部署到GitHub上面就不用备案了。码云是国内的，应该要备案了，<br>这个就看各位小伙伴的选择了。可以看看我的网站哦，</p>
+<blockquote>
+<p><a href="https://colablog.cn/" target="_blank" rel="noopener">https://colablog.cn/</a></p>
+</blockquote>
+<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><h2 id="第一步，安装工具"><a href="#第一步，安装工具" class="headerlink" title="第一步，安装工具"></a>第一步，安装工具</h2><p>我们需要创建一个空的项目，怎么创建呢？这里我是使用Hexo的博客框架，<br>他会使用Markdown引擎快速渲染出静态页面。<br>安装hexo的前提是需要安装好下面的应用程序：</p>
+<blockquote>
+<p>Node.js (Should be at least nodejs 6.9)<br>Git</p>
+</blockquote>
+<p>然后使用npm安装Hexo。(可以的话去配置个淘宝的cnpm镜像，快贼多)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<h2 id="第二步，hexo创建项目"><a href="#第二步，hexo创建项目" class="headerlink" title="第二步，hexo创建项目"></a>第二步，hexo创建项目</h2><p>我们需要使用hexo建立一个空的项目,这里的项目名为blog。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init blog</span><br><span class="line">$ cd blog</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+
+<p>为了在可以在本地调试效果，我们需要安装hexo-server，就是Hexo的服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-server --save</span><br></pre></td></tr></table></figure>
+
+<p>然后启动hexo-server，访问的网址的<code>localhost:4000</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>启动后应该可以看见下面的界面<br><img src="http://pvhmagcvg.bkt.clouddn.com/hexo-server%E5%90%AF%E5%8A%A8%E9%A1%B5%E9%9D%A2.jpg" alt="hexo-server页面"></p>
+<p>新建名为test的文章测试一下，创建好后在<code>locaohost:4000</code>可以看到新的文章哦。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new post test //全写</span><br><span class="line">$ hexo new test //简写，默认为post（文章）</span><br></pre></td></tr></table></figure>
+
+<p>到此为止你已经可以在本地建好博客。</p>
+<h1 id="第三步-使用NexT主题-可跳过"><a href="#第三步-使用NexT主题-可跳过" class="headerlink" title="第三步 使用NexT主题(可跳过)"></a>第三步 使用NexT主题(可跳过)</h1><p>hexo也有推荐使用的主题列表，入口在这：</p>
+<blockquote>
+<p><a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a></p>
+</blockquote>
+<p>不过我没有去看这些主题，我是使用了NexT的主题，入口在这：</p>
+<blockquote>
+<p><a href="http://theme-next.iissnan.com/theme-settings.html#author-sites" target="_blank" rel="noopener">http://theme-next.iissnan.com/theme-settings.html#author-sites</a></p>
+</blockquote>
+<p>首先我们克隆最新的NexT版本，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;你的项目目录&gt;</span><br><span class="line">$ git clone https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+
+<p>然后在hexo的配置文件(_config.yml)文件里面，找到<code>theme</code>字段，修改如下：</p>
+<blockquote>
+<p>theme: next</p>
+</blockquote>
+<p>个人觉得next默认的主题样式还是比较丑的，我们可以在next主题下看到还有另外三种样式，搜索关键字<br><code>Schemes</code>可以看到如下主题，我使用的第三个<code>Pisces</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Schemes</span><br><span class="line">#scheme: Muse</span><br><span class="line">#scheme: Mist</span><br><span class="line">scheme: Pisces</span><br><span class="line">#scheme: Gemini</span><br></pre></td></tr></table></figure>
+
+<p>主题如下：<br><img src="http://pvhmagcvg.bkt.clouddn.com/next%E4%B8%BB%E9%A2%98.jpg" alt="next主题"></p>
+<p>看着是不是怪丑的，特别是第二篇文章，怎么会展示这么多呢？其实可以调整的，反正我是找了好久，在next主题下，<br>搜索关键字<code>auto_excerpt</code>,修改如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">auto_excerpt:</span><br><span class="line">  enable: true</span><br><span class="line">  length: 150</span><br></pre></td></tr></table></figure>
+
+<p>到此为止我们已经可以使用NexT主题啦。更详细的配置就进去官网看看吧（上面有）。</p>
+<h3 id="第四步-部署到GitHub"><a href="#第四步-部署到GitHub" class="headerlink" title="第四步 部署到GitHub"></a>第四步 部署到GitHub</h3><p>首先，我们要在GitHub上面创建一个仓库，这里我叫做blog吧。<br>然后我们需要把我们本地的blog项目初始化一下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;你的本地项目目录&gt;</span><br><span class="line">$ git init</span><br><span class="line">$ git add -A //把全部都添加进去吧，也没啥</span><br><span class="line">$ git commit -m &quot;首次提交&quot;</span><br><span class="line">$ git remote add origin &lt;你自己的仓库路径&gt;</span><br><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<p>然后我们进入blog仓库的setting中，然后往下拉看到<code>GitHub Pages</code><br><img src="http://pvhmagcvg.bkt.clouddn.com/GitPage-1.jpg" alt="GitHub Pages"></p>
+<p>修改完后页面会自己刷新，然后重新拉回<code>GitHub Pages</code>这部分。你会看到他给了你一个网址，没错！就是这个网址，<br>你打开试试！！试试就试试，404…。<br>你先记住这个网址，咱们先把这个网址叫做<code>博客网址</code>吧。</p>
+<p>其实部署到GitPages上面的话，hexo还是要做一些设置的，不然他怎么知道你要部署到那个地方去哦。<br>以后会很简单的：<br>设置你项目的root路径，在hexo配置文件(_config.yml)中，搜索关键字<code>root</code>, 改为你的仓库名称,如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># URL</span><br><span class="line">root: /blog</span><br></pre></td></tr></table></figure>
+
+<p>在hexo的配置文件(_config.yml)中，搜索关键字<code>deploy</code>(其实就在最下面)，设置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: &lt;你的仓库地址&gt; //https://github.com/xxx/blog.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>安装hexo-deployer-git，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd &lt;你的项目目录&gt;</span><br><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>然后你再执行下面这条命令就OK了！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate --deploy //全写</span><br><span class="line">$ hexo g -d //缩写</span><br></pre></td></tr></table></figure>
+
+<p>赶紧打开上面说的<code>博客网址</code>看看，是不是404！，没错！<br>等一会吧，GitHub还没缓过来呢，执行完命令之后大概差不多一分钟之后刷新一下，<br>你就可以看到你梦寐以求的页面了。<br>以后咱们创建文章就很简单了，新建并且编写好文章之后，执行使用部署到服务器的命令就Ok了。操作如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &lt;文章名&gt; //新建文章</span><br><span class="line">$ hexo g -d //部署到GitHub，你就可以看到的新文章啦！</span><br></pre></td></tr></table></figure>
+
+<p>毕竟第一次难免是比较困难。嗯，没错，我说的是部署GitPages。如果你也是跟着我这篇文章一步一步走的话，<br>应该是没什么毛病的，因为我是自己重新部署一个项目的，然后一步一步的把步骤记录下来的。如果有什么问题的话，<br>可以留言一下，或致邮箱<a href="mailto:821312534@qq.com" target="_blank" rel="noopener">821312534@qq.com</a>。谢啦，</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat.jpg" alt="Johnson wechat" style="width: 200px; max-width: 100%;">
+    <div>这个是我的个人微信公众号，喜欢的我的文章的朋友可以关注一下，谢谢</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Johnson
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/08/14/部署GitPage/" title="部署GitPage">http://yoursite.com/2019/08/14/部署GitPage/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/29/ubuntu-ufw/" rel="next" title="ubuntu防火墙规则之ufw">
+                <i class="fa fa-chevron-left"></i> ubuntu防火墙规则之ufw
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/zerro.jpg" alt="Johnson">
+            
+              <p class="site-author-name" itemprop="name">Johnson</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.cnblogs.com/Johnson-lin/" target="_blank" title="博客园">
+                      
+                        <i class="fa fa-fw fa-globe"></i>博客园</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开始"><span class="nav-number">2.</span> <span class="nav-text">开始</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一步，安装工具"><span class="nav-number">2.1.</span> <span class="nav-text">第一步，安装工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二步，hexo创建项目"><span class="nav-number">2.2.</span> <span class="nav-text">第二步，hexo创建项目</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三步-使用NexT主题-可跳过"><span class="nav-number">3.</span> <span class="nav-text">第三步 使用NexT主题(可跳过)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第四步-部署到GitHub"><span class="nav-number">3.0.1.</span> <span class="nav-text">第四步 部署到GitHub</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<script async src="/lib/busuanzi/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; Thu Jul 25 2019 08:00:00 GMT+0800 (GMT+08:00) &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Johnson</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">12.6k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+    <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
