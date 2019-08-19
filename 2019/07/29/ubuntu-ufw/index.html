@@ -546,47 +546,7 @@
 
 
 
-<% if(theme.gitment.enable) { %>
-<div id="gitment_title" class="gitment_title"></div>
-<div id="container" style="display:none"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
-  const myTheme = {
-    render(state, instance) {
-      const container = document.createElement('div');
-      container.lang = "en-US";
-      container.className = 'gitment-container gitment-root-container';
-      container.appendChild(instance.renderHeader(state, instance));
-      container.appendChild(instance.renderEditor(state, instance));
-      container.appendChild(instance.renderComments(state, instance));
-      container.appendChild(instance.renderFooter(state, instance));
-      return container;
-    }
-  }
-
-  function showGitment() {
-    $("#gitment_title").attr("style", "display:none");
-    $("#container").attr("style", "").addClass("gitment_container");
-    var gitment = new Gitment({
-      id: decodeURI(window.location.pathname),
-      theme: myTheme,
-      owner: 'Johnson',
-      repo: 'https://colablog.cn',
-      oauth: {
-        client_id: 'da9fe4248a028d54c224',
-        client_secret: '717e83c67ce6e454bcbf49ba915aad133e6f86ca'
-      }
-    });
-    gitment.render('container');
-  }
-
-  showGitment();
-</script>
-<% } %>
-
-        </%></%></div>
+        </div>
         
           
   
@@ -910,7 +870,7 @@
         var gitment = new Gitmint({
             id: window.location.pathname, 
             owner: 'Johnson',
-            repo: 'https://colablog.cn',
+            repo: '',
             
             lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
             
