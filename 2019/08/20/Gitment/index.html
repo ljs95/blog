@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="前言继上一篇的GitPages部署自己的网站后，现在开始添加博客的评论插件Gitment。这里的话我是使用hexo添加gitment插件，如果不是使用hexo，请到官网指定这里。 开始第一步 注册 OAuth Application首先在点击这里注册自己OAuth Application，此处有四个内容：  Application name： 随意填写Homepage URL: 随意填写一个url">
+<meta name="description" content="前言继上一篇的GitPages部署自己的网站 现在开始添加博客的评论插件Gitment。这里的话我是使用hexo添加gitment插件，如果不是使用hexo，请到官网指定这里。 开始第一步 注册 OAuth Application首先在点击这里注册自己OAuth Application，此处有四个内容：  Application name： 随意填写Homepage URL: 随意填写一个urlA">
 <meta name="keywords" content="GitPages">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gitment评论插件的使用">
 <meta property="og:url" content="http://yoursite.com/2019/08/20/Gitment/index.html">
 <meta property="og:site_name" content="Johnson">
-<meta property="og:description" content="前言继上一篇的GitPages部署自己的网站后，现在开始添加博客的评论插件Gitment。这里的话我是使用hexo添加gitment插件，如果不是使用hexo，请到官网指定这里。 开始第一步 注册 OAuth Application首先在点击这里注册自己OAuth Application，此处有四个内容：  Application name： 随意填写Homepage URL: 随意填写一个url">
+<meta property="og:description" content="前言继上一篇的GitPages部署自己的网站 现在开始添加博客的评论插件Gitment。这里的话我是使用hexo添加gitment插件，如果不是使用hexo，请到官网指定这里。 开始第一步 注册 OAuth Application首先在点击这里注册自己OAuth Application，此处有四个内容：  Application name： 随意填写Homepage URL: 随意填写一个urlA">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pvhmagcvg.bkt.clouddn.com/Gitment-1.jpg">
-<meta property="og:updated_time" content="2019-08-20T12:06:22.443Z">
+<meta property="og:updated_time" content="2019-08-21T00:23:48.666Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gitment评论插件的使用">
-<meta name="twitter:description" content="前言继上一篇的GitPages部署自己的网站后，现在开始添加博客的评论插件Gitment。这里的话我是使用hexo添加gitment插件，如果不是使用hexo，请到官网指定这里。 开始第一步 注册 OAuth Application首先在点击这里注册自己OAuth Application，此处有四个内容：  Application name： 随意填写Homepage URL: 随意填写一个url">
+<meta name="twitter:description" content="前言继上一篇的GitPages部署自己的网站 现在开始添加博客的评论插件Gitment。这里的话我是使用hexo添加gitment插件，如果不是使用hexo，请到官网指定这里。 开始第一步 注册 OAuth Application首先在点击这里注册自己OAuth Application，此处有四个内容：  Application name： 随意填写Homepage URL: 随意填写一个urlA">
 <meta name="twitter:image" content="http://pvhmagcvg.bkt.clouddn.com/Gitment-1.jpg">
 
 
@@ -348,7 +348,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  486 字数
+                  482 字数
                 </span>
               
 
@@ -385,28 +385,30 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>继上一篇的<a href="https://colablog.cn/2019/08/14/GitPage%E9%83%A8%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84%E9%A1%B9%E7%9B%AE/#more" target="_blank" rel="noopener">GitPages部署自己的网站</a>后，<br>现在开始添加博客的评论插件Gitment。这里的话我是使用hexo添加gitment插件，如果不是使用hexo，请到<a href="https://imsun.net/posts/gitment-introduction/" target="_blank" rel="noopener">官网指定这里</a>。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>继上一篇的<br><a href="https://colablog.cn/2019/08/14/GitPage%E9%83%A8%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84%E9%A1%B9%E7%9B%AE/#more" target="_blank" rel="noopener">GitPages部署自己的网站</a></p>
+<p>现在开始添加博客的评论插件Gitment。这里的话我是使用hexo添加gitment插件，如果不是使用hexo，请到<a href="https://imsun.net/posts/gitment-introduction/" target="_blank" rel="noopener">官网指定这里</a>。</p>
 <h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><h2 id="第一步-注册-OAuth-Application"><a href="#第一步-注册-OAuth-Application" class="headerlink" title="第一步 注册 OAuth Application"></a>第一步 注册 OAuth Application</h2><p>首先在<a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">点击这里</a>注册自己OAuth Application，<br>此处有四个内容：</p>
 <blockquote>
 <p>Application name： 随意填写<br>Homepage URL: 随意填写一个url<br>Application description: 随意填写<br>Authorization callback URL: 填你的博客网址（例: <a href="https://user.github.io/blog/），如果有域名则填域名。" target="_blank" rel="noopener">https://user.github.io/blog/），如果有域名则填域名。</a></p>
 </blockquote>
 <p>注册完后你会得到一个 client ID 和一个 client secret，记住这两个玩意，等会hexo配置会用到</p>
+<br>
+
 <h1 id="第二步-安装Gitment"><a href="#第二步-安装Gitment" class="headerlink" title="第二步 安装Gitment"></a>第二步 安装Gitment</h1><p>在你的博客下使用npm进行安装gitment</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --save gitment</span><br></pre></td></tr></table></figure>
+
+<br>
 
 <h1 id="第三步-修改主题配置"><a href="#第三步-修改主题配置" class="headerlink" title="第三步 修改主题配置"></a>第三步 修改主题配置</h1><p>因为这里我使用的是Next主题配置，在配置文件搜索关键字<code>gitment</code>,主要配置如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">gitment:</span><br><span class="line">  enable: true //这里必须为开启</span><br><span class="line">  ...</span><br><span class="line">  github_user: username</span><br><span class="line">  github_repo: blog_comments #新建一个存储评论的仓库，这里填写仓库名</span><br><span class="line">  client_id: #第一步注册的client_id</span><br><span class="line">  client_secret: #第一步注册的client_secret</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
 
 <p>github_user不知道是哪个？你在github页面中，点击你的头像看到第一行显示<code>signed in as xxx</code>，<br>就是填写这个<code>xxx</code>。github_repo这里是让你再新建一个仓库，用来存储评论的，不是当前的这个博客的仓库，<br>然后填上你仓库名的名字，对！就是单纯的名字，仓库名叫<code>blog_comments</code>就填<code>blog_comments</code>。</p>
+<br>
+
 <h1 id="第四步-初始化评论插件"><a href="#第四步-初始化评论插件" class="headerlink" title="第四步 初始化评论插件"></a>第四步 初始化评论插件</h1><p>搞定好以上的步骤后，你就能看到博客的下方是这样的<br><img src="http://pvhmagcvg.bkt.clouddn.com/Gitment-1.jpg" alt="Gitment图片1"><br>点击登入后，<code>(未开放评论)</code>的地方会显示一个按钮让你初始化，点击按钮然后你就可以进行评论啦！</p>
 <br>
 好了,到此为止就搞定了成功接入了Gitment插件了。如果有什么问题可以留言一下咯。Thanks♪(･ω･)ﾉ。
-参考我的博客:
-
-<blockquote>
-<p><a href="https://colablog.cn/" target="_blank" rel="noopener">https://colablog.cn/</a></p>
-</blockquote>
-
+参考我的博客
       
     </div>
     
