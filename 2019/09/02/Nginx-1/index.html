@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Centos搭建php + nginx环境更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm  安装Yum源管理工具 1yum install yum-utils    安装PHP执行以">
+<meta name="description" content="更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm  安装Yum源管理工具 1yum install yum-utils    安装PHP执行以下命令安装php环境 1yum insta">
 <meta name="keywords" content="nginx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS搭建php + nginx环境">
 <meta property="og:url" content="http://yoursite.com/2019/09/02/Nginx-1/index.html">
 <meta property="og:site_name" content="Johnson">
-<meta property="og:description" content="Centos搭建php + nginx环境更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm  安装Yum源管理工具 1yum install yum-utils    安装PHP执行以">
+<meta property="og:description" content="更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm  安装Yum源管理工具 1yum install yum-utils    安装PHP执行以下命令安装php环境 1yum insta">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-02T12:41:27.454Z">
+<meta property="og:updated_time" content="2019-09-02T12:44:32.643Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS搭建php + nginx环境">
-<meta name="twitter:description" content="Centos搭建php + nginx环境更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm  安装Yum源管理工具 1yum install yum-utils    安装PHP执行以">
+<meta name="twitter:description" content="更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm  安装Yum源管理工具 1yum install yum-utils    安装PHP执行以下命令安装php环境 1yum insta">
 
 
 
@@ -346,7 +346,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  525 字数
+                  520 字数
                 </span>
               
 
@@ -383,7 +383,7 @@
       
 
       
-        <h1 id="Centos搭建php-nginx环境"><a href="#Centos搭建php-nginx环境" class="headerlink" title="Centos搭建php + nginx环境"></a>Centos搭建php + nginx环境</h1><h2 id="更新Centos的yum源"><a href="#更新Centos的yum源" class="headerlink" title="更新Centos的yum源"></a>更新Centos的yum源</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br></pre></td></tr></table></figure>
+        <h1 id="更新Centos的yum源"><a href="#更新Centos的yum源" class="headerlink" title="更新Centos的yum源"></a>更新Centos的yum源</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br></pre></td></tr></table></figure>
 
 <p>安装EPEL源和REMI源</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release</span><br><span class="line">yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm</span><br></pre></td></tr></table></figure>
@@ -393,7 +393,7 @@
 
 <br>
 
-<h2 id="安装PHP"><a href="#安装PHP" class="headerlink" title="安装PHP"></a>安装PHP</h2><p>执行以下命令安装php环境</p>
+<h1 id="安装PHP"><a href="#安装PHP" class="headerlink" title="安装PHP"></a>安装PHP</h1><p>执行以下命令安装php环境</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y php73-php php73-php-fpm</span><br></pre></td></tr></table></figure>
 
 <p>执行完后查看php版本，查看是否成功</p>
@@ -401,19 +401,19 @@
 
 <br>
 
-<h2 id="准备Nginx的依赖软件"><a href="#准备Nginx的依赖软件" class="headerlink" title="准备Nginx的依赖软件"></a>准备Nginx的依赖软件</h2><h3 id="GCC编译器"><a href="#GCC编译器" class="headerlink" title="GCC编译器"></a>GCC编译器</h3><p>GCC编译器和G++，用于编写Nginx HTTP模块</p>
+<h1 id="准备Nginx的依赖软件"><a href="#准备Nginx的依赖软件" class="headerlink" title="准备Nginx的依赖软件"></a>准备Nginx的依赖软件</h1><h2 id="GCC编译器"><a href="#GCC编译器" class="headerlink" title="GCC编译器"></a>GCC编译器</h2><p>GCC编译器和G++，用于编写Nginx HTTP模块</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y gcc</span><br><span class="line">yum install -y gcc-c++</span><br></pre></td></tr></table></figure>
 
-<h3 id="PCRE库"><a href="#PCRE库" class="headerlink" title="PCRE库"></a>PCRE库</h3><p>函数库，支持正则表达式，如果在nginx.conf里面使用了正则表达式，那么编译Nginx时就必须引进PCRE库，用于解析HTTP模块的正则表达式,<br>如果你不会用到正则表达式则可以忽略。</p>
+<h2 id="PCRE库"><a href="#PCRE库" class="headerlink" title="PCRE库"></a>PCRE库</h2><p>函数库，支持正则表达式，如果在nginx.conf里面使用了正则表达式，那么编译Nginx时就必须引进PCRE库，用于解析HTTP模块的正则表达式,<br>如果你不会用到正则表达式则可以忽略。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y pcre pcre-devel</span><br></pre></td></tr></table></figure>
 
-<h3 id="zlib库"><a href="#zlib库" class="headerlink" title="zlib库"></a>zlib库</h3><p>用于对http包的内容做gzip格式的压缩。</p>
+<h2 id="zlib库"><a href="#zlib库" class="headerlink" title="zlib库"></a>zlib库</h2><p>用于对http包的内容做gzip格式的压缩。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y zlib zlib-devel</span><br></pre></td></tr></table></figure>
 
-<h3 id="OpenSSL开发库"><a href="#OpenSSL开发库" class="headerlink" title="OpenSSL开发库"></a>OpenSSL开发库</h3><p>使用SSL协议上安全传输HTTP，就是所谓的https。</p>
+<h2 id="OpenSSL开发库"><a href="#OpenSSL开发库" class="headerlink" title="OpenSSL开发库"></a>OpenSSL开发库</h2><p>使用SSL协议上安全传输HTTP，就是所谓的https。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y openssl openssl-devel</span><br></pre></td></tr></table></figure>
 
-<h2 id="安装Niginx"><a href="#安装Niginx" class="headerlink" title="安装Niginx"></a>安装Niginx</h2><p>首先当Nginx官网下载源码包，官网下载地址：<a href="http://nginx.org/en/download.html" target="_blank" rel="noopener">http://nginx.org/en/download.html</a><br>也可以和我一样下载1.16.1版本。</p>
+<h1 id="安装Niginx"><a href="#安装Niginx" class="headerlink" title="安装Niginx"></a>安装Niginx</h1><p>首先当Nginx官网下载源码包，官网下载地址：<a href="http://nginx.org/en/download.html" target="_blank" rel="noopener">http://nginx.org/en/download.html</a><br>也可以和我一样下载1.16.1版本。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~ #回到家目录</span><br><span class="line">wget http://nginx.org/download/nginx-1.16.1.tar.gz #下载源码包</span><br><span class="line">tar -zxvf nginx-1.16.1.tar.gz</span><br></pre></td></tr></table></figure>
 
 <p>然后我们开始进行编译安装Nginx，进入解压后的目录后，执行以下3行命令：</p>
@@ -640,7 +640,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Centos搭建php-nginx环境"><span class="nav-number">1.</span> <span class="nav-text">Centos搭建php + nginx环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#更新Centos的yum源"><span class="nav-number">1.1.</span> <span class="nav-text">更新Centos的yum源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装PHP"><span class="nav-number">1.2.</span> <span class="nav-text">安装PHP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备Nginx的依赖软件"><span class="nav-number">1.3.</span> <span class="nav-text">准备Nginx的依赖软件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GCC编译器"><span class="nav-number">1.3.1.</span> <span class="nav-text">GCC编译器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCRE库"><span class="nav-number">1.3.2.</span> <span class="nav-text">PCRE库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zlib库"><span class="nav-number">1.3.3.</span> <span class="nav-text">zlib库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenSSL开发库"><span class="nav-number">1.3.4.</span> <span class="nav-text">OpenSSL开发库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Niginx"><span class="nav-number">1.4.</span> <span class="nav-text">安装Niginx</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#更新Centos的yum源"><span class="nav-number">1.</span> <span class="nav-text">更新Centos的yum源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装PHP"><span class="nav-number">2.</span> <span class="nav-text">安装PHP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备Nginx的依赖软件"><span class="nav-number">3.</span> <span class="nav-text">准备Nginx的依赖软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GCC编译器"><span class="nav-number">3.1.</span> <span class="nav-text">GCC编译器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCRE库"><span class="nav-number">3.2.</span> <span class="nav-text">PCRE库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zlib库"><span class="nav-number">3.3.</span> <span class="nav-text">zlib库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenSSL开发库"><span class="nav-number">3.4.</span> <span class="nav-text">OpenSSL开发库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Niginx"><span class="nav-number">4.</span> <span class="nav-text">安装Niginx</span></a></li></ol></div>
             
 
           </div>
