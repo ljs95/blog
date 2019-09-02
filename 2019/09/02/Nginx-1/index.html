@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="鸟哥的Linux私房菜,">
+  <meta name="keywords" content="nginx,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="目录与路径相对路径与绝对路径上一章简单的提到绝对路径和相对路径  绝对路径：路径的写法一定是由根目录（/）写起的，例如：/home/user 这个目录相对路径：路径的写法不是由根目录（/）写起，例如：我当前所在目录 /home/user，我要切换到/home/user2 目录下。那么写法就是 cd ../user2，其实相对路径指的意思是：相对于当前目录的路径。    目录的相关操作特殊的目录：1">
-<meta name="keywords" content="鸟哥的Linux私房菜">
+<meta name="description" content="Centos搭建php + nginx环境更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm  安装Yum源管理工具 1yum install yum-utils    安装PHP执行以">
+<meta name="keywords" content="nginx">
 <meta property="og:type" content="article">
-<meta property="og:title" content="鸟哥的Linux私房菜笔记第六章-文件与目录管理（一）">
-<meta property="og:url" content="http://yoursite.com/2019/06/01/鸟哥Linux6-1/index.html">
+<meta property="og:title" content="CentOS搭建php + nginx环境">
+<meta property="og:url" content="http://yoursite.com/2019/09/02/Nginx-1/index.html">
 <meta property="og:site_name" content="Johnson">
-<meta property="og:description" content="目录与路径相对路径与绝对路径上一章简单的提到绝对路径和相对路径  绝对路径：路径的写法一定是由根目录（/）写起的，例如：/home/user 这个目录相对路径：路径的写法不是由根目录（/）写起，例如：我当前所在目录 /home/user，我要切换到/home/user2 目录下。那么写法就是 cd ../user2，其实相对路径指的意思是：相对于当前目录的路径。    目录的相关操作特殊的目录：1">
+<meta property="og:description" content="Centos搭建php + nginx环境更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm  安装Yum源管理工具 1yum install yum-utils    安装PHP执行以">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-24T14:24:21.921Z">
+<meta property="og:updated_time" content="2019-09-02T12:41:27.454Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="鸟哥的Linux私房菜笔记第六章-文件与目录管理（一）">
-<meta name="twitter:description" content="目录与路径相对路径与绝对路径上一章简单的提到绝对路径和相对路径  绝对路径：路径的写法一定是由根目录（/）写起的，例如：/home/user 这个目录相对路径：路径的写法不是由根目录（/）写起，例如：我当前所在目录 /home/user，我要切换到/home/user2 目录下。那么写法就是 cd ../user2，其实相对路径指的意思是：相对于当前目录的路径。    目录的相关操作特殊的目录：1">
+<meta name="twitter:title" content="CentOS搭建php + nginx环境">
+<meta name="twitter:description" content="Centos搭建php + nginx环境更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm  安装Yum源管理工具 1yum install yum-utils    安装PHP执行以">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/01/鸟哥Linux6-1/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/02/Nginx-1/">
 
 
 
 
 
-  <title>鸟哥的Linux私房菜笔记第六章-文件与目录管理（一） | Johnson</title>
+  <title>CentOS搭建php + nginx环境 | Johnson</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/01/鸟哥Linux6-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/02/Nginx-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Johnson">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">鸟哥的Linux私房菜笔记第六章-文件与目录管理（一）</h1>
+          <h1 class="post-title" itemprop="name headline">CentOS搭建php + nginx环境</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-01T01:04:42+08:00">
-                2019-06-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-02T20:40:21+08:00">
+                2019-09-02
               </time>
             
 
@@ -305,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
                   </a>
                 </span>
 
@@ -323,8 +323,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/06/01/鸟哥Linux6-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/06/01/鸟哥Linux6-1/" itemprop="commentsCount"></span>
+                <a href="/2019/09/02/Nginx-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/09/02/Nginx-1/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -346,7 +346,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k 字数
+                  525 字数
                 </span>
               
 
@@ -362,7 +362,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -383,64 +383,49 @@
       
 
       
-        <h1 id="目录与路径"><a href="#目录与路径" class="headerlink" title="目录与路径"></a>目录与路径</h1><h2 id="相对路径与绝对路径"><a href="#相对路径与绝对路径" class="headerlink" title="相对路径与绝对路径"></a>相对路径与绝对路径</h2><p>上一章简单的提到绝对路径和相对路径</p>
-<blockquote>
-<p>绝对路径：路径的写法一定是由根目录（/）写起的，例如：/home/user 这个目录<br>相对路径：路径的写法不是由根目录（/）写起，例如：我当前所在目录 /home/user，我要切换到/home/user2 目录下。那么写法就是 cd ../user2，其实相对路径指的意思是：相对于当前目录的路径。</p>
-</blockquote>
-<br>
+        <h1 id="Centos搭建php-nginx环境"><a href="#Centos搭建php-nginx环境" class="headerlink" title="Centos搭建php + nginx环境"></a>Centos搭建php + nginx环境</h1><h2 id="更新Centos的yum源"><a href="#更新Centos的yum源" class="headerlink" title="更新Centos的yum源"></a>更新Centos的yum源</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br></pre></td></tr></table></figure>
 
-<h2 id="目录的相关操作"><a href="#目录的相关操作" class="headerlink" title="目录的相关操作"></a>目录的相关操作</h2><h3 id="特殊的目录："><a href="#特殊的目录：" class="headerlink" title="特殊的目录："></a>特殊的目录：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.   //代表当前目录</span><br><span class="line">..  //代表上一次目录</span><br><span class="line">-   //代表前一个工作目录（其实就是上一个操作的目录）</span><br><span class="line">~   //代表当前用户的家目录，例如当前用户是user，那么user的家目录就是在/home/user下</span><br><span class="line">~username   //代表用户名为username的用户的家目录。</span><br></pre></td></tr></table></figure>
+<p>安装EPEL源和REMI源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release</span><br><span class="line">yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm</span><br></pre></td></tr></table></figure>
 
-<br>
-
-<h3 id="常见的处理目录的指令"><a href="#常见的处理目录的指令" class="headerlink" title="常见的处理目录的指令"></a>常见的处理目录的指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd     //切换目录</span><br><span class="line">pwd    //显示当前目录</span><br><span class="line">mkdir  //创建目录</span><br><span class="line">rmdir  //删除空目录，注意是空目录！不空的目录后面再讲</span><br></pre></td></tr></table></figure>
-
-<p>简单指令用法如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /home/user //使用绝对路径切换目录</span><br><span class="line">pwd           //显示当前所在目录，只会显示绝对路径</span><br><span class="line">mkdir dir     //创建一个名为dir的目录（可以理解为文件夹）</span><br><span class="line">rmdir dir     //删除一个名为dir的空目录</span><br></pre></td></tr></table></figure>
+<p>安装Yum源管理工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install yum-utils</span><br></pre></td></tr></table></figure>
 
 <br>
 
-<h2 id="执行文件路径变量：-PATH"><a href="#执行文件路径变量：-PATH" class="headerlink" title="执行文件路径变量：$PATH"></a>执行文件路径变量：$PATH</h2><p>ls为查阅文件属性的指令，起对应完整文件名为：/bin/ls（这是绝对路径），那么为什么我们输入ls就会执行/bin/ls这个指令呢？这是因为环境变量PATH所致的。相当于我们Window下的环境变量path。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo $PATH   //打印PATH变量，$号后面接的是变量。</span><br><span class="line">/home/vagrant/bin:/home/vagrant/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</span><br></pre></td></tr></table></figure>
+<h2 id="安装PHP"><a href="#安装PHP" class="headerlink" title="安装PHP"></a>安装PHP</h2><p>执行以下命令安装php环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y php73-php php73-php-fpm</span><br></pre></td></tr></table></figure>
 
-<p>可以看到每个目录中间用冒号（:）来隔开，每个目录都会有顺序之分。我们之所以可以执行ls命令，那是因为ls指令存在/bin目录下，我们可以看到$PATH有/bin这个目录，所以ls指令就可以直接执行啦。<br>例举常用添加环境变量的两种方式，需要把/home/vagrant添加到环境变量：<br>1.只对当前用户生效：<br>修改家目录下的 .bashrc文件，然后在文件的最下方加入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/home/vagrant:$PATH</span><br><span class="line">///保存后执行</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
-
-<p>2.修改/etc/environment文件，直接使用vim命令在后面添加就可以了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/environment //查看该文件</span><br><span class="line">PATH=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games&quot;</span><br></pre></td></tr></table></figure>
+<p>执行完后查看php版本，查看是否成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">php73 -v</span><br><span class="line">PHP 7.3.9 (cli) (built: Aug 27 2019 22:52:39) ( NTS )</span><br><span class="line">Copyright (c) 1997-2018 The PHP Group</span><br><span class="line">Zend Engine v3.3.9, Copyright (c) 1998-2018 Zend Technologies</span><br></pre></td></tr></table></figure>
 
 <br>
 
-<h1 id="文件与目录管理"><a href="#文件与目录管理" class="headerlink" title="文件与目录管理"></a>文件与目录管理</h1><p>文件与目录的管理，其实主要就是显示属性、复制、删除、移动等操作。<br>选项：</p>
-<h2 id="文件与目录的查看：ls"><a href="#文件与目录的查看：ls" class="headerlink" title="文件与目录的查看：ls"></a>文件与目录的查看：ls</h2><p><code>ls</code>可以说是最常用的指令了，而<code>ls</code>指令一些常用的选项如下：<br>-a : 列出全部文件，包括隐藏文件（开头为 . 的文件）<br>-d : 仅列出目录本身，而不列出目录内的文件数据<br>-l  : 列出的文件或目录，一个占一行，并且显示文件的属性、权限等等数据。<br>使用方式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -[options]</span><br></pre></td></tr></table></figure>
+<h2 id="准备Nginx的依赖软件"><a href="#准备Nginx的依赖软件" class="headerlink" title="准备Nginx的依赖软件"></a>准备Nginx的依赖软件</h2><h3 id="GCC编译器"><a href="#GCC编译器" class="headerlink" title="GCC编译器"></a>GCC编译器</h3><p>GCC编译器和G++，用于编写Nginx HTTP模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y gcc</span><br><span class="line">yum install -y gcc-c++</span><br></pre></td></tr></table></figure>
 
-<br>
+<h3 id="PCRE库"><a href="#PCRE库" class="headerlink" title="PCRE库"></a>PCRE库</h3><p>函数库，支持正则表达式，如果在nginx.conf里面使用了正则表达式，那么编译Nginx时就必须引进PCRE库，用于解析HTTP模块的正则表达式,<br>如果你不会用到正则表达式则可以忽略。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y pcre pcre-devel</span><br></pre></td></tr></table></figure>
 
-<h2 id="复制、删除与移动：cp-rm-mv"><a href="#复制、删除与移动：cp-rm-mv" class="headerlink" title="复制、删除与移动：cp,rm,mv"></a>复制、删除与移动：cp,rm,mv</h2><p><strong>cp（复制文件或目录）</strong><br><code>cp</code>指令也非常重要，因为我们也经常进行文件的复制，所以也会常常用到这个指令。如果要去复制别人的文件，我们必须有read（读）权限。一般来说复制别人的文件后，该文件的拥有者就会变成自己的啦。<br>常用选项：<br>-i : 若文件已经存在时，询问是否需要覆盖文件。<br>-p : 把文件的属性（权限、用户、时间）一起复制过去。<br>-r ：递归复制，例如复制非空的目录，就需要使用这个指令啦。</p>
-<p>使用方式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp [-options] 源文件 目标文件</span><br><span class="line">cp -i /usr/bin /tmp/bin //例子</span><br></pre></td></tr></table></figure>
+<h3 id="zlib库"><a href="#zlib库" class="headerlink" title="zlib库"></a>zlib库</h3><p>用于对http包的内容做gzip格式的压缩。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y zlib zlib-devel</span><br></pre></td></tr></table></figure>
 
-<br>
-**rm（移除文件和目录）**
-选项：
- -f : 忽略不存在的文件，不会出现警告信息
- -i : 执行删除动作时会询问你是否真的需要删除
- -r : 递归删除，常用在目录的删除上，使用这命令要再三确认啊。危险！
+<h3 id="OpenSSL开发库"><a href="#OpenSSL开发库" class="headerlink" title="OpenSSL开发库"></a>OpenSSL开发库</h3><p>使用SSL协议上安全传输HTTP，就是所谓的https。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y openssl openssl-devel</span><br></pre></td></tr></table></figure>
 
-<p>使用方式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm [-options] 文件或目录</span><br></pre></td></tr></table></figure>
+<h2 id="安装Niginx"><a href="#安装Niginx" class="headerlink" title="安装Niginx"></a>安装Niginx</h2><p>首先当Nginx官网下载源码包，官网下载地址：<a href="http://nginx.org/en/download.html" target="_blank" rel="noopener">http://nginx.org/en/download.html</a><br>也可以和我一样下载1.16.1版本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~ #回到家目录</span><br><span class="line">wget http://nginx.org/download/nginx-1.16.1.tar.gz #下载源码包</span><br><span class="line">tar -zxvf nginx-1.16.1.tar.gz</span><br></pre></td></tr></table></figure>
 
-<br>
-**mv（移动/更名 文件或目录）**
-相似于window下的剪切和重命名操作。
-选项：
--f ：如果文件已存在，不会询问而只是直接覆盖。
--i ：如果文件已存在，则会询问是否需要覆盖。
--u ：如果文件已存在，且复制的文件比已存在的文件新，就会覆盖。
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv -[options] 源文件 目标文件</span><br><span class="line">mv /home/vagrant /tmp/vg  //此命令就会把home下vagrant目录移动到tmp目录下，并且改名为vg啦。</span><br></pre></td></tr></table></figure>
+<p>然后我们开始进行编译安装Nginx，进入解压后的目录后，执行以下3行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
 
-<p>扩展：其实更名还有一个命令，叫做rename。需要详细了解的话可以 man rename看一看。<br><br></p>
+<p>默认情况下，Nginx会被安装到目录/usr/local/nginx中，然后我们来启动一下Nginx吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/nginx/sbin/nginx</span><br></pre></td></tr></table></figure>
+
+<p>在浏览器输入你的ip地址，就能看到<code>Welcome to nginx!</code>啦！<br>启动好了就该关闭掉拉，毕竟是测试，快速停止服务如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">usrlocal/nginx/sbin/nginx -s stop #强制退出</span><br><span class="line">usrlocal/nginx/sbin/nginx -s stop #正常退出</span><br></pre></td></tr></table></figure>
+
+<p>强制退出这个命令一般不太建议使用，就像电脑重装系统，安装到一半来个关机然后你就爽歪歪。<br>建议使用正常退出。<br>下一篇继续讲Niginx的，如果帮到你，请关注我啦！！~</p>
 
       
     </div>
@@ -469,7 +454,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2019/06/01/鸟哥Linux6-1/" title="鸟哥的Linux私房菜笔记第六章-文件与目录管理（一）">http://yoursite.com/2019/06/01/鸟哥Linux6-1/</a>
+    <a href="http://yoursite.com/2019/09/02/Nginx-1/" title="CentOS搭建php + nginx环境">http://yoursite.com/2019/09/02/Nginx-1/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -484,7 +469,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/鸟哥的Linux私房菜/" rel="tag"># 鸟哥的Linux私房菜</a>
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
           
         </div>
       
@@ -497,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/19/PHP正则表达式/" rel="next" title="PHP正则表达式">
-                <i class="fa fa-chevron-left"></i> PHP正则表达式
+              <a href="/2019/08/20/Gitment/" rel="next" title="Gitment评论插件的使用">
+                <i class="fa fa-chevron-left"></i> Gitment评论插件的使用
               </a>
             
           </div>
@@ -506,10 +491,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/12/网站实现markdown/" rel="prev" title="网站实现markdown功能">
-                网站实现markdown功能 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -659,7 +640,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录与路径"><span class="nav-number">1.</span> <span class="nav-text">目录与路径</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#相对路径与绝对路径"><span class="nav-number">1.1.</span> <span class="nav-text">相对路径与绝对路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录的相关操作"><span class="nav-number">1.2.</span> <span class="nav-text">目录的相关操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊的目录："><span class="nav-number">1.2.1.</span> <span class="nav-text">特殊的目录：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的处理目录的指令"><span class="nav-number">1.2.2.</span> <span class="nav-text">常见的处理目录的指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行文件路径变量：-PATH"><span class="nav-number">1.3.</span> <span class="nav-text">执行文件路径变量：$PATH</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件与目录管理"><span class="nav-number">2.</span> <span class="nav-text">文件与目录管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件与目录的查看：ls"><span class="nav-number">2.1.</span> <span class="nav-text">文件与目录的查看：ls</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制、删除与移动：cp-rm-mv"><span class="nav-number">2.2.</span> <span class="nav-text">复制、删除与移动：cp,rm,mv</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Centos搭建php-nginx环境"><span class="nav-number">1.</span> <span class="nav-text">Centos搭建php + nginx环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#更新Centos的yum源"><span class="nav-number">1.1.</span> <span class="nav-text">更新Centos的yum源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装PHP"><span class="nav-number">1.2.</span> <span class="nav-text">安装PHP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备Nginx的依赖软件"><span class="nav-number">1.3.</span> <span class="nav-text">准备Nginx的依赖软件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GCC编译器"><span class="nav-number">1.3.1.</span> <span class="nav-text">GCC编译器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCRE库"><span class="nav-number">1.3.2.</span> <span class="nav-text">PCRE库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zlib库"><span class="nav-number">1.3.3.</span> <span class="nav-text">zlib库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenSSL开发库"><span class="nav-number">1.3.4.</span> <span class="nav-text">OpenSSL开发库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Niginx"><span class="nav-number">1.4.</span> <span class="nav-text">安装Niginx</span></a></li></ol></li></ol></div>
             
 
           </div>
