@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm  安装Yum源管理工具 1yum install yum-utils    安装PHP执行以下命令安装php环境 1yum insta">
+<meta name="description" content="前言最近开始看看nginx的玩意，感觉再不学就很Low了，nginx的安装部分是根据&amp;lt;&amp;lt;深入理解Nginx模块开发与架构解析第2版&amp;gt;&amp;gt;一书抽取出来的，这本书写的很详细，如果有小伙伴想要入门或者深入的话，这本书都是不错的选择。 更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum insta">
 <meta name="keywords" content="nginx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS搭建php + nginx环境">
 <meta property="og:url" content="http://yoursite.com/2019/09/02/Nginx-1/index.html">
 <meta property="og:site_name" content="Johnson">
-<meta property="og:description" content="更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm  安装Yum源管理工具 1yum install yum-utils    安装PHP执行以下命令安装php环境 1yum insta">
+<meta property="og:description" content="前言最近开始看看nginx的玩意，感觉再不学就很Low了，nginx的安装部分是根据&amp;lt;&amp;lt;深入理解Nginx模块开发与架构解析第2版&amp;gt;&amp;gt;一书抽取出来的，这本书写的很详细，如果有小伙伴想要入门或者深入的话，这本书都是不错的选择。 更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum insta">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-02T12:44:32.643Z">
+<meta property="og:updated_time" content="2019-09-02T12:59:21.115Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS搭建php + nginx环境">
-<meta name="twitter:description" content="更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm  安装Yum源管理工具 1yum install yum-utils    安装PHP执行以下命令安装php环境 1yum insta">
+<meta name="twitter:description" content="前言最近开始看看nginx的玩意，感觉再不学就很Low了，nginx的安装部分是根据&amp;lt;&amp;lt;深入理解Nginx模块开发与架构解析第2版&amp;gt;&amp;gt;一书抽取出来的，这本书写的很详细，如果有小伙伴想要入门或者深入的话，这本书都是不错的选择。 更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum insta">
 
 
 
@@ -346,7 +346,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  520 字数
+                  611 字数
                 </span>
               
 
@@ -383,7 +383,8 @@
       
 
       
-        <h1 id="更新Centos的yum源"><a href="#更新Centos的yum源" class="headerlink" title="更新Centos的yum源"></a>更新Centos的yum源</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br></pre></td></tr></table></figure>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近开始看看nginx的玩意，感觉再不学就很Low了，nginx的安装部分是根据&lt;&lt;深入理解Nginx模块开发与架构解析第2版&gt;&gt;一书抽取出来的，<br>这本书写的很详细，如果有小伙伴想要入门或者深入的话，这本书都是不错的选择。</p>
+<h1 id="更新Centos的yum源"><a href="#更新Centos的yum源" class="headerlink" title="更新Centos的yum源"></a>更新Centos的yum源</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br></pre></td></tr></table></figure>
 
 <p>安装EPEL源和REMI源</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release</span><br><span class="line">yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm</span><br></pre></td></tr></table></figure>
@@ -640,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#更新Centos的yum源"><span class="nav-number">1.</span> <span class="nav-text">更新Centos的yum源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装PHP"><span class="nav-number">2.</span> <span class="nav-text">安装PHP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备Nginx的依赖软件"><span class="nav-number">3.</span> <span class="nav-text">准备Nginx的依赖软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GCC编译器"><span class="nav-number">3.1.</span> <span class="nav-text">GCC编译器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCRE库"><span class="nav-number">3.2.</span> <span class="nav-text">PCRE库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zlib库"><span class="nav-number">3.3.</span> <span class="nav-text">zlib库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenSSL开发库"><span class="nav-number">3.4.</span> <span class="nav-text">OpenSSL开发库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Niginx"><span class="nav-number">4.</span> <span class="nav-text">安装Niginx</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更新Centos的yum源"><span class="nav-number">2.</span> <span class="nav-text">更新Centos的yum源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装PHP"><span class="nav-number">3.</span> <span class="nav-text">安装PHP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备Nginx的依赖软件"><span class="nav-number">4.</span> <span class="nav-text">准备Nginx的依赖软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GCC编译器"><span class="nav-number">4.1.</span> <span class="nav-text">GCC编译器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCRE库"><span class="nav-number">4.2.</span> <span class="nav-text">PCRE库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zlib库"><span class="nav-number">4.3.</span> <span class="nav-text">zlib库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenSSL开发库"><span class="nav-number">4.4.</span> <span class="nav-text">OpenSSL开发库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Niginx"><span class="nav-number">5.</span> <span class="nav-text">安装Niginx</span></a></li></ol></div>
             
 
           </div>
@@ -676,7 +677,7 @@
     
       <span class="post-meta-item-text">总字数&#58;</span>
     
-    <span title="总字数">13.6k</span>
+    <span title="总字数">13.7k</span>
   
 </div>
 
