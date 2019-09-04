@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Johnson">
 <meta property="og:description" content="前言最近开始看看nginx的玩意，感觉再不学就很Low了，nginx的安装部分是根据&amp;lt;&amp;lt;深入理解Nginx模块开发与架构解析第2版&amp;gt;&amp;gt;一书抽取出来的，这本书写的很详细，如果有小伙伴想要入门或者深入的话，这本书都是不错的选择。 更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum insta">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-02T12:59:21.115Z">
+<meta property="og:updated_time" content="2019-09-04T15:25:12.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS搭建php + nginx环境">
 <meta name="twitter:description" content="前言最近开始看看nginx的玩意，感觉再不学就很Low了，nginx的安装部分是根据&amp;lt;&amp;lt;深入理解Nginx模块开发与架构解析第2版&amp;gt;&amp;gt;一书抽取出来的，这本书写的很详细，如果有小伙伴想要入门或者深入的话，这本书都是不错的选择。 更新Centos的yum源1yum update  安装EPEL源和REMI源 12yum install epel-releaseyum insta">
@@ -346,7 +346,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  611 字数
+                  657 字数
                 </span>
               
 
@@ -394,11 +394,14 @@
 
 <br>
 
-<h1 id="安装PHP"><a href="#安装PHP" class="headerlink" title="安装PHP"></a>安装PHP</h1><p>执行以下命令安装php环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y php73-php php73-php-fpm</span><br></pre></td></tr></table></figure>
+<h1 id="安装PHP"><a href="#安装PHP" class="headerlink" title="安装PHP"></a>安装PHP</h1><p>执行以下命令安装php环境和thinkphp框架会使用到的php扩展功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y php73-php php73-php-fpm php73-php-zip php73-php-mbstring</span><br></pre></td></tr></table></figure>
+
+<p>然后创建名为php的软链接（相当于window的快捷方式）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/bin/php73 /usr/bin/php</span><br></pre></td></tr></table></figure>
 
 <p>执行完后查看php版本，查看是否成功</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">php73 -v</span><br><span class="line">PHP 7.3.9 (cli) (built: Aug 27 2019 22:52:39) ( NTS )</span><br><span class="line">Copyright (c) 1997-2018 The PHP Group</span><br><span class="line">Zend Engine v3.3.9, Copyright (c) 1998-2018 Zend Technologies</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">php -v</span><br><span class="line">PHP 7.3.9 (cli) (built: Aug 27 2019 22:52:39) ( NTS )</span><br><span class="line">Copyright (c) 1997-2018 The PHP Group</span><br><span class="line">Zend Engine v3.3.9, Copyright (c) 1998-2018 Zend Technologies</span><br></pre></td></tr></table></figure>
 
 <br>
 
