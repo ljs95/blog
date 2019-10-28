@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Java,">
 
 
 
@@ -79,14 +79,18 @@
 
 
 
+<meta name="description" content="简述Java有三种移位运算符，分别为：  左移运算符 &amp;lt;&amp;lt; 右移运算符 &amp;gt;&amp;gt; 无符号右移运算符 &amp;gt;&amp;gt;&amp;gt;  首先，移位运算符根据名字可知是使用二进制进行运算的。在Integer.java中，我们可以看到有两个静态常量，MIN_VALUE 和 MAX_VALUE，这两个常量控制了Integer的最小值和最大值，如下： 1234567891011/** * A">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java移位运算符">
 <meta property="og:url" content="http://yoursite.com/2019/10/29/Java移位运算符/index.html">
 <meta property="og:site_name" content="Johnson">
+<meta property="og:description" content="简述Java有三种移位运算符，分别为：  左移运算符 &amp;lt;&amp;lt; 右移运算符 &amp;gt;&amp;gt; 无符号右移运算符 &amp;gt;&amp;gt;&amp;gt;  首先，移位运算符根据名字可知是使用二进制进行运算的。在Integer.java中，我们可以看到有两个静态常量，MIN_VALUE 和 MAX_VALUE，这两个常量控制了Integer的最小值和最大值，如下： 1234567891011/** * A">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-28T23:23:49.599Z">
+<meta property="og:updated_time" content="2019-10-28T23:25:08.752Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java移位运算符">
+<meta name="twitter:description" content="简述Java有三种移位运算符，分别为：  左移运算符 &amp;lt;&amp;lt; 右移运算符 &amp;gt;&amp;gt; 无符号右移运算符 &amp;gt;&amp;gt;&amp;gt;  首先，移位运算符根据名字可知是使用二进制进行运算的。在Integer.java中，我们可以看到有两个静态常量，MIN_VALUE 和 MAX_VALUE，这两个常量控制了Integer的最小值和最大值，如下： 1234567891011/** * A">
 
 
 
@@ -289,6 +293,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -320,7 +346,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0 字数
+                  603 字数
                 </span>
               
 
@@ -336,7 +362,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -357,7 +383,56 @@
       
 
       
-        
+        <h1 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h1><p>Java有三种移位运算符，分别为：</p>
+<ol>
+<li>左移运算符 &lt;&lt;</li>
+<li>右移运算符 &gt;&gt;</li>
+<li>无符号右移运算符 &gt;&gt;&gt;</li>
+</ol>
+<p>首先，移位运算符根据名字可知是使用二进制进行运算的。在Integer.java中，我们可以看到有两个静态常量，<code>MIN_VALUE</code> 和 <code>MAX_VALUE</code>，这两个常量控制了Integer的最小值和最大值，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A constant holding the minimum value an &#123;<span class="doctag">@code</span> int&#125; can</span></span><br><span class="line"><span class="comment"> * have, -2&lt;sup&gt;31&lt;/sup&gt;.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Native</span> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span>   MIN_VALUE = <span class="number">0x80000000</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A constant holding the maximum value an &#123;<span class="doctag">@code</span> int&#125; can</span></span><br><span class="line"><span class="comment"> * have, 2&lt;sup&gt;31&lt;/sup&gt;-1.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Native</span> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span>   MAX_VALUE = <span class="number">0x7fffffff</span>;</span><br></pre></td></tr></table></figure>
+
+<p>注释上说明这两个值得范围：</p>
+<blockquote>
+<p>MIN_VALUE（最小值） = -2^31 = -2,147,483,648‬<br>MAX_VALUE（最大值） = 2^31 = 2,147,483,647</p>
+</blockquote>
+<p>在32位运算中，首位为1则代表负数，0则代表正数，如：  </p>
+<blockquote>
+<p>1000 0000 0000 0000 0000 0000 0000 0000 负数，该值等于MIN_VALUE<br>0111 1111 1111 1111 1111 1111 1111 1111 正数，该值等于MAX_VALUE</p>
+</blockquote>
+<p>根据上述可知，Integer是32位运算的。</p>
+<br>
+
+<h1 id="左移运算符-lt-lt"><a href="#左移运算符-lt-lt" class="headerlink" title="左移运算符 &lt;&lt;"></a>左移运算符 &lt;&lt;</h1><p>使用 &lt;&lt; 时，需要在低位进行补0，例子如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line">System.out.println(Integer.toBinaryString(a));</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> b = a &lt;&lt; <span class="number">1</span>;</span><br><span class="line">System.out.println(Integer.toBinaryString(b));</span><br><span class="line">System.out.println(b);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"----------------------------------------------"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> c = -<span class="number">3</span>;</span><br><span class="line">System.out.println(Integer.toBinaryString(c));</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> d = c &lt;&lt; <span class="number">1</span>;</span><br><span class="line">System.out.println(Integer.toBinaryString(d));</span><br><span class="line">System.out.println(d);</span><br></pre></td></tr></table></figure>
+
+<p>输入如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">11</span><br><span class="line">110</span><br><span class="line">6</span><br><span class="line">----------------------------------------------</span><br><span class="line">11111111111111111111111111111101</span><br><span class="line">11111111111111111111111111111010</span><br><span class="line">-6</span><br></pre></td></tr></table></figure>
+
+<p>可以清楚的看到 3 &lt;&lt; 1 时，在后面补0，得到 110 即等于6;</p>
+<br>
+
+<h1 id="右移运算符-gt-gt"><a href="#右移运算符-gt-gt" class="headerlink" title="右移运算符 &gt;&gt;"></a>右移运算符 &gt;&gt;</h1><p>右移运算符时，正数高位补0，负数高位补1。如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line">System.out.println(Integer.toBinaryString(a));</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> b1 = a &gt;&gt; <span class="number">1</span>;</span><br><span class="line">System.out.println(Integer.toBinaryString(b1));</span><br><span class="line">System.out.println(b1);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"----------------------------------------------"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> c = -<span class="number">3</span>;</span><br><span class="line">System.out.println(Integer.toBinaryString(c));</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> d = c &gt;&gt; <span class="number">1</span>;</span><br><span class="line">System.out.println(Integer.toBinaryString(d));</span><br><span class="line">System.out.println(d);</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">11</span><br><span class="line">1</span><br><span class="line">1</span><br><span class="line">----------------------------------------------</span><br><span class="line">11111111111111111111111111111101</span><br><span class="line">11111111111111111111111111111110</span><br><span class="line">-2</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="无符号右移-gt-gt-gt"><a href="#无符号右移-gt-gt-gt" class="headerlink" title="无符号右移 &gt;&gt;&gt;"></a>无符号右移 &gt;&gt;&gt;</h1><p>在正数当中，&gt;&gt; 和 &gt;&gt;&gt; 是一样的。负数使用无符号右移时，则高位不进行补位。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> c = -<span class="number">3</span>;</span><br><span class="line">System.out.println(Integer.toBinaryString(c));</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> d = c &gt;&gt;&gt; <span class="number">1</span>;</span><br><span class="line">System.out.println(Integer.toBinaryString(d));</span><br><span class="line">System.out.println(d);</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">11111111111111111111111111111101</span><br><span class="line">1111111111111111111111111111110</span><br><span class="line">2147483646</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>#总结</p>
+<blockquote>
+<p>左移运算符 &lt;&lt; ： 需要在低位进行补0<br>右移运算符 &gt;&gt; ： 正数高位补0，负数高位补1<br>无符号右移运算符 &gt;&gt;&gt; ：在正数当中，&gt;&gt; 和 &gt;&gt;&gt; 是一样的。负数使用无符号右移时，则高位不进行补位</p>
+</blockquote>
+
       
     </div>
     
@@ -397,6 +472,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
       
 
       
@@ -473,8 +554,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -502,7 +592,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -513,7 +603,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -547,6 +637,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简述"><span class="nav-number">1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#左移运算符-lt-lt"><span class="nav-number">2.</span> <span class="nav-text">左移运算符 &lt;&lt;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#右移运算符-gt-gt"><span class="nav-number">3.</span> <span class="nav-text">右移运算符 &gt;&gt;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#无符号右移-gt-gt-gt"><span class="nav-number">4.</span> <span class="nav-text">无符号右移 &gt;&gt;&gt;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -576,7 +682,7 @@
     
       <span class="post-meta-item-text">总字数&#58;</span>
     
-    <span title="总字数">13.7k</span>
+    <span title="总字数">14.3k</span>
   
 </div>
 
