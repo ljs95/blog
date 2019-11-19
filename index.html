@@ -1003,7 +1003,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/02/Nginx-1/" itemprop="url">CentOS搭建php + nginx环境</a></h1>
+                <a class="post-title-link" href="/2019/09/02/Nginx-1/" itemprop="url">CentOS搭建Nginx环境</a></h1>
         
 
         <div class="post-meta">
@@ -1069,7 +1069,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  657 字数
+                  415 字数
                 </span>
               
 
@@ -1085,7 +1085,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  1 分钟
                 </span>
               
             </div>
@@ -1108,9 +1108,10 @@
       
         
           
-          前言最近开始看看nginx的玩意，感觉再不学就很Low了，nginx的安装部分是根据&lt;&lt;深入理解Nginx模块开发与架构解析第2版&gt;&gt;一书抽取出来的，这本书写的很详细，如果有小伙伴想要入门或者深入的话，这本书都是不错的选择。
-更新Centos的yum源1yum update
+          准备Nginx的依赖软件GCC编译器GCC编译器和G++，用于编写Nginx HTTP模块
+12yum install -y gccyum install -y gcc-c++
 
+PCRE库函数库，支持正则表达式，如果在nginx.conf里面使用了正则表达式，那么编译Nginx时就必须引进PCRE
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -2189,7 +2190,7 @@
     
       <span class="post-meta-item-text">总字数&#58;</span>
     
-    <span title="总字数">18.1k</span>
+    <span title="总字数">17.9k</span>
   
 </div>
 
